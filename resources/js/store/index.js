@@ -1,12 +1,12 @@
 
 import { createStore } from "vuex"
 
-import form_validation from "./modules/form_validation";
+import formValid from "./modules/form_validation";
 import module_b from "./modules/module_b";
 
 const store = createStore ({
     modules: {
-        a: form_validation,
+        formValid: formValid,
         b: module_b
     },
 
@@ -21,8 +21,8 @@ const store = createStore ({
     },
 
     getters: {
-        divider_getter (state) {
-            return state.count / 2
+        getSetAtts (state) {
+            return state.formValid.tmp
         },
 
         // getters
@@ -37,11 +37,12 @@ const store = createStore ({
         get_mut (state, mutations) {
             return state.number
         },
-
-        
     },
 
     mutations: {
+        big (state) {
+            state.count += 20
+        },
         increment (state) {
             state.number ++
         },
@@ -65,11 +66,14 @@ const store = createStore ({
 })
 
 store.commit({
+    type: 'big'
+},{
     type: 'increment'
 }, {
     type: 'decrement'
+}, {
+    type: 'setAtts'
 })
 
 export default store
-
 

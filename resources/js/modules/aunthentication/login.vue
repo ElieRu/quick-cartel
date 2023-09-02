@@ -99,18 +99,23 @@ export default {
             let myInputs = ''
             let style = 'margin-left: 10px;margin-right: 5px;'
             let style_display_icon = 'margin-right: 10px;cursor: pointer;'
-            for (let i = 0; i < this.box.fields; i++) {
-                myInputs += `<div>
-                        <div class="${this.box.class}">
-                            <i class="${this.box.icon[i]}" style="${style}"></i>
-                            <input @click="clicked(i)" class="${this.box.input}" v-model="${this.box.values[i]}" type="${this.box.type[i]}"
-                            placeholder="${this.box.placeholder[i]}" name="${this.box.name[i]}">
-                            <i class="${this.box.password_icon[i]}" @click="display_password(i)"
-                            style="${style_display_icon}"></i>
-                        </div>
-                    </div>`
-            }
-            return myInputs
+
+            console.log(this.$store.getters.getSetAtts)
+
+            // console.log(this.$store.getters.getForm(2))
+            // for (let i = 0; i < this.box.fields; i++) {
+            //     myInputs += `<div>
+            //             <div class="${this.$store.state.formValid.divInput}">
+            //                 <i class="${this.box.icon[i]}" style="${style}"></i>
+            //                 <input @click="clicked(i)" class="${this.box.input}" v-model="${this.box.values[i]}" type="${this.box.type[i]}"
+            //                 placeholder="${this.box.placeholder[i]}" name="${this.box.name[i]}">
+            //                 <i class="${this.box.password_icon[i]}" @click="display_password(i)"
+            //                 style="${style_display_icon}"></i>
+            //             </div>
+            //         </div>`
+            // }
+            // return myInputs
+            return this.$store.getters.getForm(2)
         }       
     }
 }

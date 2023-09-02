@@ -5,7 +5,7 @@
 
 <script>
 import axios from 'axios';
-import router from '../routes';
+import router from '../../routes';
 
 
 export default {

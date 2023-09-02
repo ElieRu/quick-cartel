@@ -1,12 +1,12 @@
 
 import { createStore } from "vuex"
 
-import module_a from "./modules/module_a";
+import form_validation from "./modules/form_validation";
 import module_b from "./modules/module_b";
 
 const store = createStore ({
     modules: {
-        a: module_a,
+        a: form_validation,
         b: module_b
     },
 

@@ -10,8 +10,8 @@
 
 // import { router } from "router"
 
-import footerVue from './layout/footer.vue'
-import headerVue from './layout/header.vue'
+import footerVue from './modules/layout/footer.vue'
+import headerVue from './modules/layout/header.vue'
 
 export default {
     components: {

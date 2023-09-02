@@ -3,15 +3,20 @@
         <div class="text-start" id="div-cont-veri" style="justify-content: space-between;">
             <div class="text-center mt-4 mb-4" id="div-img-logo"><i class="fas fa-code" style="font-size: 50px;"></i></div>
             <form method="post"><label class="form-label fs-4 text-start">Connectez-vous</label>
-                <div v-for="item, i in box.fields">
+                <!-- <div v-for="item, i in box.fields">
                     <div :class="box.class[i]">
                         <i :class="box.icon[i]" style="margin-left: 10px;margin-right: 5px;"></i>
                         <input @click="clicked(i)" :class="box.input" v-model="box.values[i]" :type="box.type[i]"
-                            :placeholder="box.placeholder[i]" :name="box.name[i]" >
-                            <i :class="box.password_icon[i]" @click="display_password(i)" style="margin-right: 10px;cursor: pointer;"></i>
+                            :placeholder="box.placeholder[i]" :name="box.name[i]">
+                        <i :class="box.password_icon[i]" @click="display_password(i)"
+                            style="margin-right: 10px;cursor: pointer;"></i>
                     </div>
-                </div>{{ display }}
-                <div class="d-flex justify-content-between"><label class="form-label text-primary">Formulaire incorrecte</label>
+                </div> -->
+                <div v-html="callInput()"></div> 
+
+                {{ display }}
+                <div class="d-flex justify-content-between"><label class="form-label text-primary">Formulaire
+                        incorrecte</label>
                     <div>
                         <div class="form-check"><input class="form-check-input" type="checkbox" id="rappel_moi"
                                 name="remember"><label class="form-check-label" for="rappel_moi"
@@ -34,16 +39,13 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </body>
 </template>
 
 <script>
-import store from '../store'
 
-// import { Store, storeKey } from 'vuex'
-
-// import { store } from "store";
 export default {
     data() {
         return {
@@ -59,24 +61,26 @@ export default {
                 name: ["email", "password"],
                 placeholder: ["Adresse mail", "Mot de passe"],
                 values: ["", ""],
-                password_icon: ["","fas fa-eye"]
+                password_icon: ["", "fas fa-eye"]
             },
             tmp: 0,
-            tmp_style: `border rounded border-1 d-flex flex-row align-items-center mb-4`
+            tmp_style: `border rounded border-1 d-flex flex-row align-items-center mb-4`,
+            myInputs: '',
+            fields: '',
+
+            cl: `border rounded border-1 d-flex flex-row align-items-center mb-4`,
         }
     },
 
-    mounted () {
-        this.home ()
-        // console.log($store.state.name)
+    mounted() {
+        // this.callImput()
     },
 
     computed: {
-        display () {
+        display() {
             if (this.box.values[this.tmp] != '') {
                 this.box.class[this.tmp] = this.tmp_style
-                
-            } 
+            }
         },
     },
 
@@ -91,10 +95,23 @@ export default {
             this.box.password_icon[i] = this.box.password_icon[i] == 'fas fa-eye' ? 'fas fa-eye-slash' : 'fas fa-eye'
         },
 
-        home () {
-            // console.log(this.$router)
-            // this.$s::
-        }
+        callInput () {
+            let myInputs = ''
+            let style = 'margin-left: 10px;margin-right: 5px;'
+            let style_display_icon = 'margin-right: 10px;cursor: pointer;'
+            for (let i = 0; i < this.box.fields; i++) {
+                myInputs += `<div>
+                        <div class="${this.box.class}">
+                            <i class="${this.box.icon[i]}" style="${style}"></i>
+                            <input @click="clicked(i)" class="${this.box.input}" v-model="${this.box.values[i]}" type="${this.box.type[i]}"
+                            placeholder="${this.box.placeholder[i]}" name="${this.box.name[i]}">
+                            <i class="${this.box.password_icon[i]}" @click="display_password(i)"
+                            style="${style_display_icon}"></i>
+                        </div>
+                    </div>`
+            }
+            return myInputs
+        }       
     }
 }
 </script>

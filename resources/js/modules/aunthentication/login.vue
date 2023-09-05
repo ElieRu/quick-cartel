@@ -4,19 +4,20 @@
             <div class="text-center mt-4 mb-4" id="div-img-logo"><i class="fas fa-code" style="font-size: 50px;"></i></div>
             <form method="post"><label class="form-label fs-4 text-start">Connectez-vous</label>
                 <!-- <div v-for="item, i in box.fields">
-                    <div :class="box.class[i]">
+                    <div :class="box.class[i]" :style="class_style">
                         <i :class="box.icon[i]" style="margin-left: 10px;margin-right: 5px;"></i>
                         <input @click="clicked(i)" :class="box.input" v-model="box.values[i]" :type="box.type[i]"
                             :placeholder="box.placeholder[i]" :name="box.name[i]">
-                        <i :class="box.password_icon[i]" @click="display_password(i)"
+                        <i v-if="box.password_icon[i]" :class="box.password_icon[i]" @click="display_password(i)"
                             style="margin-right: 10px;cursor: pointer;"></i>
                     </div>
                 </div> -->
-                <div v-html="callInput()"></div> 
-
-                {{ display }}
-                <div class="d-flex justify-content-between"><label class="form-label text-primary">Formulaire
-                        incorrecte</label>
+                
+                <callInput fields="2" leftIcons="['fas fa-user', 'fas fa-lock']" placeholder="['Adresse mail', 'Mot de passe']" type="['email', 'password']" name="['email', 'password']"></callInput>
+                <!-- name="['email', 'password']" -->
+                <!-- {{ display }} -->
+                
+                <div class="d-flex justify-content-between" style="margin-top: -20px;"><span class="form-label text-primary">Formulaire incorrecte</span>
                     <div>
                         <div class="form-check"><input class="form-check-input" type="checkbox" id="rappel_moi"
                                 name="remember"><label class="form-check-label" for="rappel_moi"
@@ -39,23 +40,30 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </body>
 </template>
 
 <script>
 
+import callInput from './components/input.vue'
+
 export default {
+    components: {
+        callInput
+    },
+    
     data() {
         return {
             box: {
                 fields: 2,
-                input: `bg-transparent border rounded-0 border-0 shadow-none form-control`,
+                input: `bg-transparent border rounded-2 border-0 shadow-none form-control`,
                 class: [
                     `border rounded border-1 d-flex flex-row align-items-center mb-4`,
                     `border rounded border-1 d-flex flex-row align-items-center mb-4`
                 ],
+                class_style: 'overflow: hidden;',
                 icon: ["fas fa-user", "fas fa-lock"],
                 type: ["email", "password"],
                 name: ["email", "password"],
@@ -66,15 +74,11 @@ export default {
             tmp: 0,
             tmp_style: `border rounded border-1 d-flex flex-row align-items-center mb-4`,
             myInputs: '',
-            fields: '',
-
-            cl: `border rounded border-1 d-flex flex-row align-items-center mb-4`,
+            // fields: 2
         }
     },
 
-    mounted() {
-        // this.callImput()
-    },
+    mounted() { },
 
     computed: {
         display() {
@@ -94,29 +98,8 @@ export default {
             this.box.type[i] = this.box.type[i] == 'password' ? 'text' : 'password'
             this.box.password_icon[i] = this.box.password_icon[i] == 'fas fa-eye' ? 'fas fa-eye-slash' : 'fas fa-eye'
         },
-
-        callInput () {
-            let myInputs = ''
-            let style = 'margin-left: 10px;margin-right: 5px;'
-            let style_display_icon = 'margin-right: 10px;cursor: pointer;'
-
-            console.log(this.$store.getters.getSetAtts)
-
-            // console.log(this.$store.getters.getForm(2))
-            // for (let i = 0; i < this.box.fields; i++) {
-            //     myInputs += `<div>
-            //             <div class="${this.$store.state.formValid.divInput}">
-            //                 <i class="${this.box.icon[i]}" style="${style}"></i>
-            //                 <input @click="clicked(i)" class="${this.box.input}" v-model="${this.box.values[i]}" type="${this.box.type[i]}"
-            //                 placeholder="${this.box.placeholder[i]}" name="${this.box.name[i]}">
-            //                 <i class="${this.box.password_icon[i]}" @click="display_password(i)"
-            //                 style="${style_display_icon}"></i>
-            //             </div>
-            //         </div>`
-            // }
-            // return myInputs
-            return this.$store.getters.getForm(2)
-        }       
+        
     }
+
 }
 </script>

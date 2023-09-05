@@ -34,7 +34,7 @@ const store = createStore ({
             return state.count - nb
         },
 
-        get_mut (state, mutations) {
+        get_mut (state) {
             return state.number
         },
     },
@@ -72,7 +72,8 @@ store.commit({
 }, {
     type: 'decrement'
 }, {
-    type: 'setAtts'
+    type: 'setAtts',
+    'test': 10
 })
 
 export default store

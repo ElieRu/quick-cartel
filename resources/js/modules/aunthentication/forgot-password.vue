@@ -7,13 +7,20 @@
                 <p>Entrez l'adresse mail associé à votre compte pour la récupération du mot de passe.</p>
             </div>
             <form method="post">
-                <div>
-                    <div class="border rounded border-1 d-flex flex-row align-items-center mb-1"><i class="fas fa-user" style="margin-left: 10px;margin-right: 5px;"></i><input class="bg-transparent border rounded-0 border-0 shadow-none form-control" type="email" placeholder="Votre adresse mail" name="email"></div>
-                </div>
-                <div class="d-flex justify-content-between"><label class="form-label text-primary">Formulaire incorrecte</label></div>
+                <callInput fields="1" leftIcons="['fas fa-user']" placeholder="['Votre adresse mail']" type="['email']" name="['email']"></callInput>
+                <div class="d-flex justify-content-between" style="margin-top: -20px;"><label class="form-label text-primary">Formulaire incorrecte</label></div>
                 <div class="mt-3 mb-3"><button class="btn btn-primary link-light border-0" type="submit" style="width: 100%;">Envoie des instructions</button></div>
             </form>
         </div>
     </div>
 </body>
 </template>
+
+<script>
+import callInput from './components/input.vue'
+export default {
+    components: {
+        callInput
+    }
+}
+</script>

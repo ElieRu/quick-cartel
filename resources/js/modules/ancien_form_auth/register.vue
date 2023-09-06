@@ -42,7 +42,6 @@ async function register(payload: RegisterPayload) {
         .then(() => {
             router.push('/')
         }).catch((error) => {
-            // console.log(error)
             this.errors = error.response.data.errors
         })
 }

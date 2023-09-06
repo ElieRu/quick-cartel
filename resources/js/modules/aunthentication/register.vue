@@ -1,10 +1,9 @@
 <template>
-
-<body class="d-flex flex-column justify-content-center" id="body-cont-auth">
-    <div class="text-center" id="div-cont-form">
-        <div id="div-img-logo" class="mt-4 mb-4"><i class="fas fa-code" style="font-size: 50px;"></i></div>
-        <div class="text-start"><label class="form-label fs-4 text-start">Créer un compte</label>
-            <form method="post">
+    <body class="d-flex flex-column justify-content-center" id="body-cont-auth">
+        <div class="text-center" id="div-cont-form">
+            <div id="div-img-logo" class="mt-4 mb-4"><i class="fas fa-code" style="font-size: 50px;"></i></div>
+            <div class="text-start"><label class="form-label fs-4 text-start">Créer un compte</label>
+                <!-- <form method="post" @submit.prevent="register(form)">
                 <div id="carousel-1" class="carousel slide" data-bs-ride="false">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -19,22 +18,67 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> -->
+                <form @submit.prevent="register(form)">
+                    <input type="text" name="name" v-model="form.name" placeholder="username"><br>
+                    <input type="email" name="email" v-model="form.email" placeholder="email"><br>
+                    <input type="password" v-model="form.password" name="password" placeholder="password"><br>
+                    <input type="password" v-model="form.password_confirmation" name="password_confirmation"
+                        placeholder="confirmation"><br>
+                    <button type="submit" class="btn btn-primary validate">valider</button>
+                </form>
+                <ul>
+                    <li v-for="error in errors">
+                    <li v-for="item in error">{{ item }}</li>
+                    </li>
+                </ul>
+            </div>
+            <div class="mb-3">
+                <p>Avez-vous un compte?&nbsp;<RouterLink :to="{ name: 'login' }">Connectez-vous</RouterLink>
+                </p>
+            </div>
         </div>
-        <div class="mb-3">
-            <p>Avez-vous un compte?&nbsp;<RouterLink :to="{name: 'login'}" >Connectez-vous</RouterLink></p>
-        </div>
-    </div>
-</body>
-
+    </body>
 </template>
 
-<script>
+<script  setup lang="ts">
+import { ref } from 'vue'
+import axios from "axios"
+import router from '../../routes';
+
+
 import callInput from '../components/input.vue'
 
-export default {
-    components: {
-        callInput
-    }
+// export default {
+//     components: {
+//         callInput
+//     }
+// }
+
+interface RegisterPayload {
+    name: String,
+    email: String,
+    password: String,
+    password_confirmation: String
 }
+
+const form = ref({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
+})
+
+const errors = ref([])
+
+async function register(payload: RegisterPayload) {
+    await axios.post(`/register`, payload)
+        .then(() => {
+            router.push('/')
+        }).catch((error) => {
+            this.errors = error.response.data.errors
+        })
+}
+
+
 </script>

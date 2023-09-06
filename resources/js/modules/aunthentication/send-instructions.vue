@@ -18,10 +18,8 @@
 
 
 <script>
-import callInput from './components/input.vue'
+
 export default {
-    components: {
-        callInput
-    }
+
 }
 </script>

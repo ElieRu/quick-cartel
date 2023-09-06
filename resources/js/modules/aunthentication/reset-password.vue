@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import callInput from './components/input.vue'
+import callInput from '../components/input.vue'
 export default {
     components: {
         callInput

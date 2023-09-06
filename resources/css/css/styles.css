@@ -63,3 +63,13 @@
   }
 }
 
+#btn-prec {
+  position: relative;
+  opacity: 1;
+  width: 61px;
+}
+
+#btn-prec:hover {
+  background: transparent;
+}
+

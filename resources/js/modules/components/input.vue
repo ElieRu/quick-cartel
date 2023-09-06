@@ -26,8 +26,8 @@ export default {
 
     data() {
         return {
-            input: `bg-transparent border rounded-2 border-0 shadow-none form-control`,
-            class_name: [],
+            input: [],
+            class_name: [], // -end
             my_left_icon: [],
             my_type: [],
             my_name: [],
@@ -52,6 +52,8 @@ export default {
                 this.values.push('')
                 this.my_placeholder.push('Initial text')
                 this.class_name.push(`border rounded border-1 d-flex flex-row align-items-center mb-4`)
+                this.input.push(`bg-transparent border rounded-2-end border-0 shadow-none form-control`)
+                console.log(this.type)
             }
 
             let init = []
@@ -78,6 +80,16 @@ export default {
                     this.password_icon.push('')
                 }
             }
+
+            // console.log(this.my_type)
+            // for (let i = 0; i < this.my_left_icon.length; i++) {
+            //     if (this.my_left_icon[i]) {
+            //         // this.input[i] = 
+            //     } else {
+            //         this.password_icon.push('')
+            //     }
+            // }
+
 
         } catch (error) {}
     },

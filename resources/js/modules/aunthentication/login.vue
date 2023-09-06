@@ -47,59 +47,11 @@
 
 <script>
 
-import callInput from './components/input.vue'
+import callInput from '../components/input.vue'
 
 export default {
     components: {
         callInput
     },
-    
-    data() {
-        return {
-            box: {
-                fields: 2,
-                input: `bg-transparent border rounded-2 border-0 shadow-none form-control`,
-                class: [
-                    `border rounded border-1 d-flex flex-row align-items-center mb-4`,
-                    `border rounded border-1 d-flex flex-row align-items-center mb-4`
-                ],
-                class_style: 'overflow: hidden;',
-                icon: ["fas fa-user", "fas fa-lock"],
-                type: ["email", "password"],
-                name: ["email", "password"],
-                placeholder: ["Adresse mail", "Mot de passe"],
-                values: ["", ""],
-                password_icon: ["", "fas fa-eye"]
-            },
-            tmp: 0,
-            tmp_style: `border rounded border-1 d-flex flex-row align-items-center mb-4`,
-            myInputs: '',
-            // fields: 2
-        }
-    },
-
-    mounted() { },
-
-    computed: {
-        display() {
-            if (this.box.values[this.tmp] != '') {
-                this.box.class[this.tmp] = this.tmp_style
-            }
-        },
-    },
-
-    methods: {
-        clicked(i) {
-            this.tmp = i
-            this.box.class[i] = this.box.class[i] + " border-primary"
-        },
-
-        display_password(i) {
-            this.box.type[i] = this.box.type[i] == 'password' ? 'text' : 'password'
-            this.box.password_icon[i] = this.box.password_icon[i] == 'fas fa-eye' ? 'fas fa-eye-slash' : 'fas fa-eye'
-        },
-        
-    }
-
 }
 </script>

@@ -3,21 +3,17 @@
         <div class="text-start" id="div-cont-veri" style="justify-content: space-between;">
             <div class="text-center mt-4 mb-4" id="div-img-logo"><i class="fas fa-code" style="font-size: 50px;"></i></div>
             <form method="post"><label class="form-label fs-4 text-start">Connectez-vous</label>
-                <!-- <div v-for="item, i in box.fields">
-                    <div :class="box.class[i]" :style="class_style">
-                        <i :class="box.icon[i]" style="margin-left: 10px;margin-right: 5px;"></i>
-                        <input @click="clicked(i)" :class="box.input" v-model="box.values[i]" :type="box.type[i]"
-                            :placeholder="box.placeholder[i]" :name="box.name[i]">
-                        <i v-if="box.password_icon[i]" :class="box.password_icon[i]" @click="display_password(i)"
-                            style="margin-right: 10px;cursor: pointer;"></i>
-                    </div>
-                </div> -->
+
+                <callInput 
+                :fields="this.$store.getters.atts(2)"
+                :left-icons="this.$store.getters.atts(['fas fa-user', 'fas fa-lock'])" 
+                :placeholder="['Adresse mail', 'Mot de passe']" 
+                :type="this.$store.getters.atts(['email', 'password'])" 
+                :name="param.name"
+                :value="param.value">
+            </callInput>
                 
-                <callInput fields="2" leftIcons="['fas fa-user', 'fas fa-lock']" placeholder="['Adresse mail', 'Mot de passe']" type="['email', 'password']" name="['email', 'password']"></callInput>
-                <!-- name="['email', 'password']" -->
-                <!-- {{ display }} -->
-                
-                <div class="d-flex justify-content-between" style="margin-top: -20px;"><span class="form-label text-primary">Formulaire incorrecte</span>
+                <div class="d-flex justify-content-between"><span class="form-label text-primary">Formulaire incorrecte</span>
                     <div>
                         <div class="form-check"><input class="form-check-input" type="checkbox" id="rappel_moi"
                                 name="remember"><label class="form-check-label" for="rappel_moi"
@@ -29,29 +25,28 @@
             </form>
             <div class="d-flex justify-content-between mb-3">
                 <RouterLink :to="{ name: 'forgot_password' }">Mot de passe oublié?</RouterLink>
-                <div class="dropdown"><button class="btn btn-primary link-body-emphasis border-0" aria-expanded="false"
-                        data-bs-toggle="dropdown" type="button"
-                        style="padding: 0px;background: transparent;font-size: 14px;">Créer un compte</button>
-                    <div class="dropdown-menu border rounded shadow" style="padding: 0px;overflow: hidden;font-size: 14px;">
-                        <RouterLink :to="{ name: 'register' }" class="dropdown-item" id="item-dropdown">pour consommateur
-                        </RouterLink>
-                        <RouterLink :to="{ name: 'register' }" class="dropdown-item" id="item-dropdown">pour entreprise
-                        </RouterLink>
-                    </div>
-                </div>
+                <RouterLink :to="{ name: 'register' }">Nouveau compte </RouterLink>
             </div>
-
         </div>
     </body>
 </template>
 
 <script>
 
-import callInput from '../components/input.vue'
+import callInput from '../globalComponents/input.vue'
 
 export default {
     components: {
         callInput
     },
+
+    data () {
+        return {
+            param: {
+                name: ['email', 'password'],
+                value: ['', ''],
+            }
+        }
+    }
 }
 </script>

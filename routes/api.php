@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\accountController;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('account', [accountController::class, 'verifyInfos']);
+Route::get('articlesOffers', function () {
+    return response()->json(
+        Offer::all(['id', 'designation', 'description'])
+    );
+});
+
+
+

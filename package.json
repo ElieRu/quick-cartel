@@ -16,9 +16,13 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
+        "@vuelidate/core": "^2.0.3",
+        "@vuelidate/validators": "^2.0.4",
+        "email-validator": "^2.0.4",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1",
         "vue-router": "^4.2.4",
+        "vuelidate": "^0.7.7",
         "vuex": "^4.0.2"
     }
 }

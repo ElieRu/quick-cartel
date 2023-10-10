@@ -7,8 +7,14 @@
                 <p>Entrez l'adresse mail associé à votre compte pour la récupération du mot de passe.</p>
             </div>
             <form method="post">
-                <callInput fields="1" leftIcons="['fas fa-user']" placeholder="['Votre adresse mail']" type="['email']" name="['email']"></callInput>
-                <div class="d-flex justify-content-between" style="margin-top: -20px;"><label class="form-label text-primary">Formulaire incorrecte</label></div>
+                <callInput 
+                :fields="this.$store.getters.atts(1)"
+                :leftIcons="this.$store.getters.atts(['fas fa-user'])" 
+                :placeholder="this.$store.getters.atts(['Votre adresse mail'])" 
+                :type="['email']" 
+                :name="param.name"
+                :value="param.value"></callInput>
+                <div class="d-flex justify-content-between"><label class="form-label text-primary">Formulaire incorrecte</label></div>
                 <div class="mt-3 mb-3"><button class="btn btn-primary link-light border-0" type="submit" style="width: 100%;">Envoie des instructions</button></div>
             </form>
         </div>
@@ -17,10 +23,18 @@
 </template>
 
 <script>
-import callInput from '../components/input.vue'
+import callInput from '../globalComponents/input.vue'
 export default {
     components: {
         callInput
+    },
+    data () {
+        return {
+            param: {
+                name: ['email'],
+                value: ['']
+            }
+        }
     }
 }
 </script>

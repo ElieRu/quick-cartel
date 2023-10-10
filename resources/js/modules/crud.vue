@@ -60,11 +60,12 @@ export default {
         async saveCategorie () {
             await axios.post(`/api/category`, this.categorie)
             .then(response => {
-                this.getCategories()
-                this.categorie.name = ''
-                this.msg = response.data
+                // this.getCategories()
+                // this.categorie.name = ''
+                // this.msg = response.data
+                // console.log(response)
             }).catch(error => {
-                this.msg = 'Not saved'
+                // this.msg = 'Not saved'
             })
         },
         async editCategory(categorie) {

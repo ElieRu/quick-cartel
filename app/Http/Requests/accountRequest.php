@@ -22,21 +22,9 @@ class accountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => 'required|min: 5',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:accounts',
+            'type' => 'required|boolean',
+            'password' => 'required|min: 8|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/|confirmed'
         ];
     }
-
-    // public function messages()
-    // {
-    //     return [
-    //         'username.required' => "required",
-    //         'username.min' => "min",
-    //         'username.unique' => "unique",
-    //         'email.required' => "required",
-    //         'email.min' => "min",
-    //         'email.unique' => "unique"
-    //     ];
-    // }
-    
 }

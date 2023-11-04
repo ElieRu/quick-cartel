@@ -1,9 +1,13 @@
 <?php
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\accountController;
+use App\Http\Controllers\userController;
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Fortify;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('account', [accountController::class, 'verifyInfos']);
-Route::get('articlesOffers', function () {
-    return response()->json(
-        Offer::all(['id', 'designation', 'description'])
-    );
+// Route::post('login', [auth])
+
+Route::middleware(['auth'])->group(function () {
+    // The private routes must be protected
 });
-
-
 

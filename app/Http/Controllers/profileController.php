@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\userRequest;
+use App\Models\Adresse;
+use App\Models\Contact;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+
+class profileController extends Controller
+{
+    public function show (Adresse $address, Contact $contact) {
+        // dd(Auth::user());
+        return Inertia::render('Private/Profile', [
+            'user' => Auth::user(),
+            'address' => Adresse::where('user_id', Auth::id())->exists() ? Adresse::where('user_id', Auth::id())->get()[0] : '',
+            // 'contact' => Contact::where('user_id', Auth::id())->exists() ? Contact::where('user_id', Auth::id())->get() : ''
+        ]);
+    }
+
+    public function update (userRequest $request, User $user) 
+    {
+        
+        try {
+            $user = User::find(Auth::id());
+
+            $user->name = $request->name;
+            $user->postnom = $request->postnom;
+            $user->email = $request->email;
+            $user->date_de_naissance = $request->date_de_naissance;
+            $user->sexe = $request->sexe;
+            $user->profession = $request->profession;
+
+            $user->save();
+
+        } catch (\Throwable $th) {
+            
+            // Block the case of two emails in DB
+
+        }
+
+    }
+
+}

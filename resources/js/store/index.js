@@ -1,13 +1,13 @@
 
 import { createStore } from "vuex"
 
-import formDatas from "./modules/formDatas";
-import requests from "./modules/requests";
+// import formDatas from "./modules/formDatas";
+// import requests from "./modules/requests";
 
 const store = createStore ({
     modules: {
-        atts: formDatas,
-        requests: requests
+        // atts: formDatas,
+        // requests: requests
     },
 
     state: {},

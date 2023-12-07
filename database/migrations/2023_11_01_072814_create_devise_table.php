@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nom', 50)->nullable();
             $table->string('symbole', 50)->nullable();
             $table->string('description', 50)->nullable();
-            $table->timestamps();
         });
     }
 

@@ -1,0 +1,186 @@
+Date : 2023-11-10 15:02:37
+Directory : c:\laragon\www\market_place\app\Http
+Total : 119 files,  -14154 codes, 244 comments, -424 blanks, all -14334 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| PHP        |         57 |      1,071 |        401 |        352 |      1,824 |
+| SCSS       |          2 |         -8 |        -11 |         -6 |        -25 |
+| JavaScript |         14 |       -391 |        -38 |        -94 |       -523 |
+| CSS        |          6 |     -2,602 |        -19 |       -366 |     -2,987 |
+| Vue        |         37 |     -3,198 |        -77 |       -307 |     -3,582 |
+| XML        |          3 |     -9,026 |        -12 |         -3 |     -9,041 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                   |        119 |    -14,154 |        244 |       -424 |    -14,334 |
+| . (Files)                                                                                           |          1 |         42 |         21 |          7 |         70 |
+| ..                                                                                                  |         63 |    -15,257 |       -157 |       -779 |    -16,193 |
+| ..\..                                                                                               |         63 |    -15,257 |       -157 |       -779 |    -16,193 |
+| ..\..\resources                                                                                     |         63 |    -15,257 |       -157 |       -779 |    -16,193 |
+| ..\..\resources\css                                                                                 |         16 |    -11,912 |        -41 |       -417 |    -12,370 |
+| ..\..\resources\css (Files)                                                                         |          1 |          0 |          0 |         -1 |         -1 |
+| ..\..\resources\css\bootstrap                                                                       |          2 |         -3 |         -8 |         -2 |        -13 |
+| ..\..\resources\css\bootstrap\css                                                                   |          1 |         -2 |         -3 |         -1 |         -6 |
+| ..\..\resources\css\bootstrap\js                                                                    |          1 |         -1 |         -5 |         -1 |         -7 |
+| ..\..\resources\css\css                                                                             |          3 |     -2,599 |        -12 |       -364 |     -2,975 |
+| ..\..\resources\css\fonts                                                                           |          4 |     -9,027 |        -16 |         -3 |     -9,046 |
+| ..\..\resources\css\js                                                                              |          6 |       -283 |         -5 |        -47 |       -335 |
+| ..\..\resources\css\js (Files)                                                                      |          4 |        -83 |         -5 |        -33 |       -121 |
+| ..\..\resources\css\js\confetti                                                                     |          2 |       -200 |          0 |        -14 |       -214 |
+| ..\..\resources\js                                                                                  |         44 |     -3,305 |       -105 |       -353 |     -3,763 |
+| ..\..\resources\js (Files)                                                                          |          2 |        -15 |        -22 |         -9 |        -46 |
+| ..\..\resources\js\Components                                                                       |          6 |       -500 |        -26 |        -46 |       -572 |
+| ..\..\resources\js\Components\Header                                                                |          6 |       -500 |        -26 |        -46 |       -572 |
+| ..\..\resources\js\Components\Header (Files)                                                        |          1 |        -98 |         -5 |        -13 |       -116 |
+| ..\..\resources\js\Components\Header\Comps                                                          |          5 |       -402 |        -21 |        -33 |       -456 |
+| ..\..\resources\js\Pages                                                                            |         31 |     -2,698 |        -51 |       -261 |     -3,010 |
+| ..\..\resources\js\Pages (Files)                                                                    |          3 |       -462 |         -1 |        -15 |       -478 |
+| ..\..\resources\js\Pages\Auth                                                                       |          5 |       -200 |         -8 |        -39 |       -247 |
+| ..\..\resources\js\Pages\Private                                                                    |         18 |     -1,626 |        -37 |       -164 |     -1,827 |
+| ..\..\resources\js\Pages\Private (Files)                                                            |          9 |     -1,133 |        -22 |        -97 |     -1,252 |
+| ..\..\resources\js\Pages\Private\ArticlesManagment                                                  |          1 |        -59 |         -2 |        -16 |        -77 |
+| ..\..\resources\js\Pages\Private\Profile                                                            |          8 |       -434 |        -13 |        -51 |       -498 |
+| ..\..\resources\js\Pages\Public                                                                     |          5 |       -410 |         -5 |        -43 |       -458 |
+| ..\..\resources\js\store                                                                            |          5 |        -92 |         -6 |        -37 |       -135 |
+| ..\..\resources\js\store (Files)                                                                    |          3 |        -49 |         -4 |        -24 |        -77 |
+| ..\..\resources\js\store\modules                                                                    |          2 |        -43 |         -2 |        -13 |        -58 |
+| ..\..\resources\sass                                                                                |          2 |         -8 |        -11 |         -6 |        -25 |
+| ..\..\resources\views                                                                               |          1 |        -32 |          0 |         -3 |        -35 |
+| Controllers                                                                                         |         32 |        592 |        196 |        208 |        996 |
+| Controllers (Files)                                                                                 |         26 |        497 |         79 |        167 |        743 |
+| Controllers\Auth                                                                                    |          6 |         95 |        117 |         41 |        253 |
+| Middleware                                                                                          |         10 |        117 |         78 |         45 |        240 |
+| Requests                                                                                            |         13 |        352 |        106 |         95 |        553 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                            | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\laragon\www\market_place\app\Http\Controllers\AdresseController.php                              | PHP        |         36 |          0 |         14 |         50 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\ConfirmPasswordController.php                 | PHP        |         14 |         20 |          7 |         41 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\ForgotPasswordController.php                  | PHP        |          8 |         10 |          5 |         23 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\LoginController.php                           | PHP        |         14 |         20 |          7 |         41 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\RegisterController.php                        | PHP        |         33 |         32 |          9 |         74 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\ResetPasswordController.php                   | PHP        |         10 |         15 |          6 |         31 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\VerificationController.php                    | PHP        |         16 |         20 |          7 |         43 |
+| c:\laragon\www\market_place\app\Http\Controllers\Controller.php                                     | PHP        |          9 |          0 |          4 |         13 |
+| c:\laragon\www\market_place\app\Http\Controllers\Paiement.php                                       | PHP        |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\PaiementCtr.php                                    | PHP        |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\TestPaiementCtr.php                                | PHP        |         12 |          0 |          5 |         17 |
+| c:\laragon\www\market_place\app\Http\Controllers\aboutController.php                                | PHP        |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\accountController.php                              | PHP        |         23 |          0 |          7 |         30 |
+| c:\laragon\www\market_place\app\Http\Controllers\achatsController.php                               | PHP        |         12 |          0 |          5 |         17 |
+| c:\laragon\www\market_place\app\Http\Controllers\articlesController.php                             | PHP        |         54 |          7 |         10 |         71 |
+| c:\laragon\www\market_place\app\Http\Controllers\articlesManagmentController.php                    | PHP        |         16 |         52 |         11 |         79 |
+| c:\laragon\www\market_place\app\Http\Controllers\authenticationController.php                       | PHP        |         31 |          0 |          7 |         38 |
+| c:\laragon\www\market_place\app\Http\Controllers\boutiquesController.php                            | PHP        |         60 |          2 |         11 |         73 |
+| c:\laragon\www\market_place\app\Http\Controllers\buyingController.php                               | PHP        |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\commandesController.php                            | PHP        |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Controllers\contactController.php                              | PHP        |         29 |         11 |          8 |         48 |
+| c:\laragon\www\market_place\app\Http\Controllers\dashboardController.php                            | PHP        |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\detailsController.php                              | PHP        |         29 |          0 |          7 |         36 |
+| c:\laragon\www\market_place\app\Http\Controllers\fournisseursController.php                         | PHP        |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Controllers\homeController.php                                 | PHP        |         13 |          0 |          4 |         17 |
+| c:\laragon\www\market_place\app\Http\Controllers\homepageController.php                             | PHP        |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\profileController.php                              | PHP        |         31 |          3 |         13 |         47 |
+| c:\laragon\www\market_place\app\Http\Controllers\promotionsController.php                           | PHP        |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\sellingController.php                              | PHP        |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\test.php                                           | PHP        |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Controllers\userController.php                                 | PHP        |         34 |          0 |         13 |         47 |
+| c:\laragon\www\market_place\app\Http\Controllers\ventesController.php                               | PHP        |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Kernel.php                                                     | PHP        |         42 |         21 |          7 |         70 |
+| c:\laragon\www\market_place\app\Http\Middleware\Authenticate.php                                    | PHP        |         11 |          3 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Middleware\EncryptCookies.php                                  | PHP        |          8 |          6 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Middleware\HandleInertiaRequests.php                           | PHP        |         17 |         21 |          6 |         44 |
+| c:\laragon\www\market_place\app\Http\Middleware\PreventRequestsDuringMaintenance.php                | PHP        |          8 |          6 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Middleware\RedirectIfAuthenticated.php                         | PHP        |         20 |          5 |          6 |         31 |
+| c:\laragon\www\market_place\app\Http\Middleware\TrimStrings.php                                     | PHP        |         11 |          5 |          4 |         20 |
+| c:\laragon\www\market_place\app\Http\Middleware\TrustHosts.php                                      | PHP        |         12 |          5 |          4 |         21 |
+| c:\laragon\www\market_place\app\Http\Middleware\TrustProxies.php                                    | PHP        |         14 |         10 |          5 |         29 |
+| c:\laragon\www\market_place\app\Http\Middleware\ValidateSignature.php                               | PHP        |          8 |         11 |          4 |         23 |
+| c:\laragon\www\market_place\app\Http\Middleware\VerifyCsrfToken.php                                 | PHP        |          8 |          6 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Requests\AdresseRequest.php                                    | PHP        |         36 |          8 |         10 |         54 |
+| c:\laragon\www\market_place\app\Http\Requests\accountRequest.php                                    | PHP        |         18 |          8 |          5 |         31 |
+| c:\laragon\www\market_place\app\Http\Requests\account_request_step1.php                             | PHP        |         26 |          8 |          6 |         40 |
+| c:\laragon\www\market_place\app\Http\Requests\account_request_step2.php                             | PHP        |         26 |          8 |          6 |         40 |
+| c:\laragon\www\market_place\app\Http\Requests\articlesManagmentRequest.php                          | PHP        |         34 |          9 |          9 |         52 |
+| c:\laragon\www\market_place\app\Http\Requests\boutiqueRequest.php                                   | PHP        |         17 |          8 |          5 |         30 |
+| c:\laragon\www\market_place\app\Http\Requests\caracteristiqueRequest.php                            | PHP        |         28 |          8 |          7 |         43 |
+| c:\laragon\www\market_place\app\Http\Requests\contactRequest.php                                    | PHP        |         23 |          8 |          6 |         37 |
+| c:\laragon\www\market_place\app\Http\Requests\imageRequest.php                                      | PHP        |         25 |          8 |          6 |         39 |
+| c:\laragon\www\market_place\app\Http\Requests\loginRequest.php                                      | PHP        |         25 |          8 |          6 |         39 |
+| c:\laragon\www\market_place\app\Http\Requests\updateBoutiqueRequest.php                             | PHP        |         38 |          8 |         11 |         57 |
+| c:\laragon\www\market_place\app\Http\Requests\userRequest.php                                       | PHP        |         38 |          9 |         13 |         60 |
+| c:\laragon\www\market_place\app\Http\Requests\validUser.php                                         | PHP        |         18 |          8 |          5 |         31 |
+| c:\laragon\www\market_place\resources\css\app.css                                                   | CSS        |          0 |          0 |         -1 |         -1 |
+| c:\laragon\www\market_place\resources\css\bootstrap\css\bootstrap.min.css                           | CSS        |         -2 |         -3 |         -1 |         -6 |
+| c:\laragon\www\market_place\resources\css\bootstrap\js\bootstrap.min.js                             | JavaScript |         -1 |         -5 |         -1 |         -7 |
+| c:\laragon\www\market_place\resources\css\css\animate.min.css                                       | CSS        |     -1,579 |         -6 |       -158 |     -1,743 |
+| c:\laragon\www\market_place\resources\css\css\bs-theme-overrides.css                                | CSS        |        -38 |          0 |         -4 |        -42 |
+| c:\laragon\www\market_place\resources\css\css\styles.css                                            | CSS        |       -982 |         -6 |       -202 |     -1,190 |
+| c:\laragon\www\market_place\resources\css\fonts\fa-brands-400.svg                                   | XML        |     -3,531 |         -4 |         -1 |     -3,536 |
+| c:\laragon\www\market_place\resources\css\fonts\fa-regular-400.svg                                  | XML        |       -799 |         -4 |         -1 |       -804 |
+| c:\laragon\www\market_place\resources\css\fonts\fa-solid-900.svg                                    | XML        |     -4,696 |         -4 |         -1 |     -4,701 |
+| c:\laragon\www\market_place\resources\css\fonts\fontawesome-all.min.css                             | CSS        |         -1 |         -4 |          0 |         -5 |
+| c:\laragon\www\market_place\resources\css\js\bootstrap.min.js                                       | JavaScript |         -1 |         -5 |         -1 |         -7 |
+| c:\laragon\www\market_place\resources\css\js\bs-init.js                                             | JavaScript |        -11 |          0 |         -2 |        -13 |
+| c:\laragon\www\market_place\resources\css\js\confetti\confetti.js                                   | JavaScript |       -199 |          0 |        -14 |       -213 |
+| c:\laragon\www\market_place\resources\css\js\confetti\confetti.min.js                               | JavaScript |         -1 |          0 |          0 |         -1 |
+| c:\laragon\www\market_place\resources\css\js\livereload.js                                          | JavaScript |        -65 |          0 |        -30 |        -95 |
+| c:\laragon\www\market_place\resources\css\js\popover.js                                             | JavaScript |         -6 |          0 |          0 |         -6 |
+| c:\laragon\www\market_place\resources\js\Components\Header\Comps\Dropdown-menu-computer-version.vue | Vue        |        -57 |         -7 |        -11 |        -75 |
+| c:\laragon\www\market_place\resources\js\Components\Header\Comps\Menu.vue                           | Vue        |       -190 |         -9 |        -22 |       -221 |
+| c:\laragon\www\market_place\resources\js\Components\Header\Comps\Navbar.vue                         | Vue        |        -48 |         -5 |          0 |        -53 |
+| c:\laragon\www\market_place\resources\js\Components\Header\Comps\Notices.vue                        | Vue        |        -82 |          0 |          0 |        -82 |
+| c:\laragon\www\market_place\resources\js\Components\Header\Comps\Theme.vue                          | Vue        |        -25 |          0 |          0 |        -25 |
+| c:\laragon\www\market_place\resources\js\Components\Header\Header.vue                               | Vue        |        -98 |         -5 |        -13 |       -116 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\ForgotPassword.vue                              | Vue        |        -34 |          0 |         -8 |        -42 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\Login.vue                                       | Vue        |        -61 |         -1 |        -11 |        -73 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\Register.vue                                    | Vue        |        -55 |         -7 |         -6 |        -68 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\ResetPassword.vue                               | Vue        |        -46 |          0 |        -11 |        -57 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\Welcome.vue                                     | Vue        |         -4 |          0 |         -3 |         -7 |
+| c:\laragon\www\market_place\resources\js\Pages\Home.vue                                             | Vue        |       -431 |         -1 |         -7 |       -439 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Achats.vue                                   | Vue        |       -146 |         -4 |        -10 |       -160 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Articles.vue                                 | Vue        |       -198 |         -3 |        -19 |       -220 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\ArticlesManagment\Details.vue                | Vue        |        -59 |         -2 |        -16 |        -77 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Commandes.vue                                | Vue        |       -127 |         -3 |         -8 |       -138 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Dashboard.vue                                | Vue        |        -20 |          0 |        -10 |        -30 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Fournisseur.vue                              | Vue        |       -188 |         -3 |        -12 |       -203 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile.vue                                  | Vue        |       -265 |         -6 |        -18 |       -289 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\Delete-Account.vue                   | Vue        |        -43 |         -1 |          0 |        -44 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\New-contact.vue                      | Vue        |        -42 |         -1 |         -4 |        -47 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\add-phone.vue                        | Vue        |        -82 |         -5 |        -23 |       -110 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\change-password.vue                  | Vue        |        -38 |         -1 |          0 |        -39 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\changes-account-infos.vue            | Vue        |        -59 |         -4 |         -4 |        -67 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\entreprise-connected.vue             | Vue        |        -28 |         -1 |          0 |        -29 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\form-address.vue                     | Vue        |        -62 |          0 |         -9 |        -71 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\form-user.vue                        | Vue        |        -80 |          0 |        -11 |        -91 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Ventes.vue                                   | Vue        |       -149 |         -3 |        -12 |       -164 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\managment.vue                                | Vue        |        -20 |          0 |         -4 |        -24 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\sell-and-buy.vue                             | Vue        |        -20 |          0 |         -4 |        -24 |
+| c:\laragon\www\market_place\resources\js\Pages\Public\About.vue                                     | Vue        |        -12 |          0 |         -3 |        -15 |
+| c:\laragon\www\market_place\resources\js\Pages\Public\Account.vue                                   | Vue        |        -12 |          0 |         -3 |        -15 |
+| c:\laragon\www\market_place\resources\js\Pages\Public\Articles.vue                                  | Vue        |        -12 |          0 |         -3 |        -15 |
+| c:\laragon\www\market_place\resources\js\Pages\Public\Boutiques.vue                                 | Vue        |       -362 |         -5 |        -31 |       -398 |
+| c:\laragon\www\market_place\resources\js\Pages\Public\Promotions.vue                                | Vue        |        -12 |          0 |         -3 |        -15 |
+| c:\laragon\www\market_place\resources\js\Pages\Test.vue                                             | Vue        |        -27 |          0 |         -8 |        -35 |
+| c:\laragon\www\market_place\resources\js\Pages\test-payment.vue                                     | Vue        |         -4 |          0 |          0 |         -4 |
+| c:\laragon\www\market_place\resources\js\app.js                                                     | JavaScript |        -11 |          0 |         -1 |        -12 |
+| c:\laragon\www\market_place\resources\js\bootstrap.js                                               | JavaScript |         -4 |        -22 |         -8 |        -34 |
+| c:\laragon\www\market_place\resources\js\store\AuthUserStore.js                                     | JavaScript |        -18 |          0 |         -4 |        -22 |
+| c:\laragon\www\market_place\resources\js\store\formDatas.js                                         | JavaScript |        -23 |          0 |        -10 |        -33 |
+| c:\laragon\www\market_place\resources\js\store\index.js                                             | JavaScript |         -8 |         -4 |        -10 |        -22 |
+| c:\laragon\www\market_place\resources\js\store\modules\SettingStore.js                              | JavaScript |        -20 |          0 |         -6 |        -26 |
+| c:\laragon\www\market_place\resources\js\store\modules\requests.js                                  | JavaScript |        -23 |         -2 |         -7 |        -32 |
+| c:\laragon\www\market_place\resources\sass\_variables.scss                                          | SCSS       |         -4 |         -2 |         -2 |         -8 |
+| c:\laragon\www\market_place\resources\sass\app.scss                                                 | SCSS       |         -4 |         -9 |         -4 |        -17 |
+| c:\laragon\www\market_place\resources\views\app.blade.php                                           | PHP        |        -32 |          0 |         -3 |        -35 |
+| Total                                                                                               |            |    -14,154 |        244 |       -424 |    -14,334 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

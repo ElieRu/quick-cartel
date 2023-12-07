@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('ventes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id')->constrained();
-            $table->integer('qtte')->nullable();
-            $table->integer('date')->nullable();
-            $table->string('statut', 50)->nullable();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('devise_id')->constrained();
-            $table->foreignId('paiement_id')->constrained();
+            // $table->foreignId('detail_id')->nullable()->constrained();
+            $table->integer('prixTotal')->nullable();
+            // $table->foreignId('client_id')->nullable()->constrained();
+            // $table->foreignId('boutique_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

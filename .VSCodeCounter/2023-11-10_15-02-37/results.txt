@@ -1,0 +1,86 @@
+Date : 2023-11-10 15:02:37
+Directory : c:\laragon\www\market_place\app\Http
+Total : 56 files,  1103 codes, 401 comments, 355 blanks, all 1859 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| PHP      |         56 |      1,103 |        401 |        355 |      1,859 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                 | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                    |         56 |      1,103 |        401 |        355 |      1,859 |
+| . (Files)                                                                            |          1 |         42 |         21 |          7 |         70 |
+| Controllers                                                                          |         32 |        592 |        196 |        208 |        996 |
+| Controllers (Files)                                                                  |         26 |        497 |         79 |        167 |        743 |
+| Controllers\Auth                                                                     |          6 |         95 |        117 |         41 |        253 |
+| Middleware                                                                           |         10 |        117 |         78 |         45 |        240 |
+| Requests                                                                             |         13 |        352 |        106 |         95 |        553 |
++--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                             | language | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\laragon\www\market_place\app\Http\Controllers\AdresseController.php               | PHP      |         36 |          0 |         14 |         50 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\ConfirmPasswordController.php  | PHP      |         14 |         20 |          7 |         41 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\ForgotPasswordController.php   | PHP      |          8 |         10 |          5 |         23 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\LoginController.php            | PHP      |         14 |         20 |          7 |         41 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\RegisterController.php         | PHP      |         33 |         32 |          9 |         74 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\ResetPasswordController.php    | PHP      |         10 |         15 |          6 |         31 |
+| c:\laragon\www\market_place\app\Http\Controllers\Auth\VerificationController.php     | PHP      |         16 |         20 |          7 |         43 |
+| c:\laragon\www\market_place\app\Http\Controllers\Controller.php                      | PHP      |          9 |          0 |          4 |         13 |
+| c:\laragon\www\market_place\app\Http\Controllers\Paiement.php                        | PHP      |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\PaiementCtr.php                     | PHP      |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\TestPaiementCtr.php                 | PHP      |         12 |          0 |          5 |         17 |
+| c:\laragon\www\market_place\app\Http\Controllers\aboutController.php                 | PHP      |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\accountController.php               | PHP      |         23 |          0 |          7 |         30 |
+| c:\laragon\www\market_place\app\Http\Controllers\achatsController.php                | PHP      |         12 |          0 |          5 |         17 |
+| c:\laragon\www\market_place\app\Http\Controllers\articlesController.php              | PHP      |         54 |          7 |         10 |         71 |
+| c:\laragon\www\market_place\app\Http\Controllers\articlesManagmentController.php     | PHP      |         16 |         52 |         11 |         79 |
+| c:\laragon\www\market_place\app\Http\Controllers\authenticationController.php        | PHP      |         31 |          0 |          7 |         38 |
+| c:\laragon\www\market_place\app\Http\Controllers\boutiquesController.php             | PHP      |         60 |          2 |         11 |         73 |
+| c:\laragon\www\market_place\app\Http\Controllers\buyingController.php                | PHP      |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\commandesController.php             | PHP      |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Controllers\contactController.php               | PHP      |         29 |         11 |          8 |         48 |
+| c:\laragon\www\market_place\app\Http\Controllers\dashboardController.php             | PHP      |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\detailsController.php               | PHP      |         29 |          0 |          7 |         36 |
+| c:\laragon\www\market_place\app\Http\Controllers\fournisseursController.php          | PHP      |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Controllers\homeController.php                  | PHP      |         13 |          0 |          4 |         17 |
+| c:\laragon\www\market_place\app\Http\Controllers\homepageController.php              | PHP      |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\profileController.php               | PHP      |         31 |          3 |         13 |         47 |
+| c:\laragon\www\market_place\app\Http\Controllers\promotionsController.php            | PHP      |         10 |          0 |          4 |         14 |
+| c:\laragon\www\market_place\app\Http\Controllers\sellingController.php               | PHP      |          6 |          1 |          4 |         11 |
+| c:\laragon\www\market_place\app\Http\Controllers\test.php                            | PHP      |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Controllers\userController.php                  | PHP      |         34 |          0 |         13 |         47 |
+| c:\laragon\www\market_place\app\Http\Controllers\ventesController.php                | PHP      |         11 |          0 |          4 |         15 |
+| c:\laragon\www\market_place\app\Http\Kernel.php                                      | PHP      |         42 |         21 |          7 |         70 |
+| c:\laragon\www\market_place\app\Http\Middleware\Authenticate.php                     | PHP      |         11 |          3 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Middleware\EncryptCookies.php                   | PHP      |          8 |          6 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Middleware\HandleInertiaRequests.php            | PHP      |         17 |         21 |          6 |         44 |
+| c:\laragon\www\market_place\app\Http\Middleware\PreventRequestsDuringMaintenance.php | PHP      |          8 |          6 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Middleware\RedirectIfAuthenticated.php          | PHP      |         20 |          5 |          6 |         31 |
+| c:\laragon\www\market_place\app\Http\Middleware\TrimStrings.php                      | PHP      |         11 |          5 |          4 |         20 |
+| c:\laragon\www\market_place\app\Http\Middleware\TrustHosts.php                       | PHP      |         12 |          5 |          4 |         21 |
+| c:\laragon\www\market_place\app\Http\Middleware\TrustProxies.php                     | PHP      |         14 |         10 |          5 |         29 |
+| c:\laragon\www\market_place\app\Http\Middleware\ValidateSignature.php                | PHP      |          8 |         11 |          4 |         23 |
+| c:\laragon\www\market_place\app\Http\Middleware\VerifyCsrfToken.php                  | PHP      |          8 |          6 |          4 |         18 |
+| c:\laragon\www\market_place\app\Http\Requests\AdresseRequest.php                     | PHP      |         36 |          8 |         10 |         54 |
+| c:\laragon\www\market_place\app\Http\Requests\accountRequest.php                     | PHP      |         18 |          8 |          5 |         31 |
+| c:\laragon\www\market_place\app\Http\Requests\account_request_step1.php              | PHP      |         26 |          8 |          6 |         40 |
+| c:\laragon\www\market_place\app\Http\Requests\account_request_step2.php              | PHP      |         26 |          8 |          6 |         40 |
+| c:\laragon\www\market_place\app\Http\Requests\articlesManagmentRequest.php           | PHP      |         34 |          9 |          9 |         52 |
+| c:\laragon\www\market_place\app\Http\Requests\boutiqueRequest.php                    | PHP      |         17 |          8 |          5 |         30 |
+| c:\laragon\www\market_place\app\Http\Requests\caracteristiqueRequest.php             | PHP      |         28 |          8 |          7 |         43 |
+| c:\laragon\www\market_place\app\Http\Requests\contactRequest.php                     | PHP      |         23 |          8 |          6 |         37 |
+| c:\laragon\www\market_place\app\Http\Requests\imageRequest.php                       | PHP      |         25 |          8 |          6 |         39 |
+| c:\laragon\www\market_place\app\Http\Requests\loginRequest.php                       | PHP      |         25 |          8 |          6 |         39 |
+| c:\laragon\www\market_place\app\Http\Requests\updateBoutiqueRequest.php              | PHP      |         38 |          8 |         11 |         57 |
+| c:\laragon\www\market_place\app\Http\Requests\userRequest.php                        | PHP      |         38 |          9 |         13 |         60 |
+| c:\laragon\www\market_place\app\Http\Requests\validUser.php                          | PHP      |         18 |          8 |          5 |         31 |
+| Total                                                                                |          |      1,103 |        401 |        355 |      1,859 |
++--------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

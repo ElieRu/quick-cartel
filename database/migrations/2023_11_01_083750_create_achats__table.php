@@ -16,9 +16,9 @@ return new class extends Migration
             $table->integer('qtte')->nullable();
             $table->date('date')->nullable();
             $table->string('statut', 50)->nullable();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('paiement_id')->constrained();
-            $table->foreignId('devise_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            // $table->foreignId('paiement_id')->constrained();
+            // $table->foreignId('devise_id')->constrained();
             $table->timestamps();
         });
     }

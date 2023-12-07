@@ -22,14 +22,14 @@ class imageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|image|mines: jpeg,pnj,svg,jpg|max: 2048'
+            'image' => 'image|mines: jpeg,pnj,svg,jpg|max: 10240'
         ];
     }
 
     public function messages()
     {
         [
-            'image.required' => "L'image est requise",
+            // 'image.required' => "L'image est requise",
             'image.image' => "Le fichier n'est pas une image",
             'image.mines' => "Format d'image non supporté",
             'image.max' => "L'image est volumineux",

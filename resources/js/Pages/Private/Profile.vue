@@ -8,7 +8,7 @@
                     <div>
                         <div
                             style="width: 150px;height: 150px;border-radius: 100%;border-width: 2px;border-style: dashed;padding: 3px;">
-                            <img src="images/img_profile1.jpg" style="width: 100%;height: 100%;border-radius: 100%;" />
+                            <img src="images/img_profile1.png" style="width: 100%;height: 100%;border-radius: 100%;" />
                         </div>
                         <input id="profile-img-1" type="file" accept="image/*" style="display: none;" /><label
                             class="form-label bg-body shadow-sm d-flex flex-column justify-content-center align-items-center"
@@ -22,15 +22,24 @@
                             </svg></label>
                     </div>
                     <div style="margin-top: 10px;width: 100%;">
-                        <div class="d-flex flex-column"><span style="font-size: 12px;">Nom &amp; Postnom</span><span
-                                style="font-size: 13px;">RUHAMYA Elie Munogolo</span></div>
-                        <div class="d-flex flex-column" style="margin-top: 15px;"><span style="font-size: 12px;">Adresse
-                                mail</span><span style="font-size: 13px;">elieruhamya20@gmail.com</span></div>
-                        <div class="d-flex flex-column" style="margin-top: 15px;"><span style="font-size: 12px;">Etat
-                                civil</span><span style="font-size: 13px;">Célibataire</span></div>
-                        <div class="d-flex flex-column" style="margin-top: 15px;"><span
-                                style="font-size: 12px;">Profession</span><span
-                                style="font-size: 13px;">Informaticien</span></div>
+
+                        <div class="d-flex flex-column" v-if="props.user.name || props.user.postnom"><span
+                                style="font-size: 12px;">Nom &amp; Postnom</span><span style="font-size: 13px;"
+                                class="text-capitalize">{{ props.user.name }} {{ props.user.postnom }}</span></div>
+
+                        <div class="d-flex flex-column" v-if="props.user.email" style="margin-top: 15px;"><span
+                                style="font-size: 12px;">Adresse
+                                mail</span><span style="font-size: 13px;" class="text-lowercase">{{ props.user.email
+                                }}</span></div>
+
+                        <div class="d-flex flex-column" v-if="props.user.sexe" style="margin-top: 15px;">
+                            <span style="font-size: 12px;">Sexe
+                            </span><span class="text-capitalize" style="font-size: 13px;">{{ props.user.sexe }}</span>
+                        </div>
+                        <div class="d-flex flex-column" v-if="props.user.profession" style="margin-top: 15px;"><span
+                                style="font-size: 12px;">Profession</span>
+                            <span class="text-capitalize" style="font-size: 13px;">{{ props.user.profession }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -132,21 +141,17 @@
                                                     class="border-0 shadow-none form-control form-control-sm" type="text"
                                                     placeholder="Profession" name="profession" v-model="form.profession" />
                                             </div>
+                                            <span style="font-size: 12px;color: var(--bs-primary);">{{
+                                                form.errors.profession }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div style="margin-top: -5px;">
-                                <div style="margin-bottom: 12px;font-size: 13px; height: 15px;">
-                                    <span style="font-size: 12px;color: var(--bs-primary);">
-                                        {{ form.errors.profession }}
-                                    </span>
-                                </div>
+                            <div style="margin-top: 0px;">
                                 <button class="btn btn-primary btn-sm link-light" type="submit">
-                                    Personnalisez vos informations</button>
+                                    Personnalisez</button>
                             </div>
                         </form>
-
                     </div>
 
                     <div class="bg-body border rounded border-0 shadow" style="padding: 10px;margin-bottom: 15px;">
@@ -204,8 +209,8 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="mt-2"><button class="btn btn-primary btn-sm link-light"
-                                        type="submit">Personnalisez votre addresse</button></div>
+                                <div><button class="btn btn-primary btn-sm link-light" type="submit">Personnalisez</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -221,17 +226,18 @@
                                         <path
                                             d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z">
                                         </path>
-                                    </svg><span style="font-size: 12px;">Mon contact</span></span><span></span></div>
+                                    </svg><span style="font-size: 12px;">Mon contact</span>
+                                </span><span></span></div>
                             <div class="border rounded" style="overflow: hidden;padding: 6px;padding-left: 7px;">
-                                <form class="d-flex">
+                                <form class="d-flex" @submit.prevent="userPhone.post('')">
 
                                     <!-- <div> -->
-                                        <input class="border-0 shadow-none form-control" type="tel"
+                                    <input class="border-0 shadow-none form-control" type="tel"
                                         style="width: 100%;height: 30px;padding-left: 3px;outline: none;"
                                         placeholder="Le numéro de téléphone" v-model="userPhone.phone" />
                                     <!-- </div> -->
-                                    
-                                    
+
+                                    {{ userPhone.errors.phone }}
                                     <button class="btn btn-primary bg-transparent border-0" type="submit"
                                         style="padding: 0px;margin-right: 4px;"><svg xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor"
@@ -255,7 +261,7 @@
 </template>
     
 <script setup>
-import Header from '../../Components/Header/Header.vue';
+import Header from '../../Components/Header/header.vue';
 
 import { useForm } from '@inertiajs/vue3'
 // import NewContact from './New-contact.vue'

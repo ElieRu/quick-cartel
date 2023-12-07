@@ -1,0 +1,52 @@
+Date : 2023-11-09 09:07:44
+Directory : c:\laragon\www\market_place\resources\js\Pages\Private
+Total : 23 files,  1426 codes, 29 comments, 125 blanks, all 1580 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Vue      |         23 |      1,426 |         29 |        125 |      1,580 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                     | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                        |         23 |      1,426 |         29 |        125 |      1,580 |
+| . (Files)                                                                                |          9 |      1,133 |         22 |         97 |      1,252 |
+| ..                                                                                       |          5 |       -200 |         -8 |        -39 |       -247 |
+| ..\Auth                                                                                  |          5 |       -200 |         -8 |        -39 |       -247 |
+| ArticlesManagment                                                                        |          1 |         59 |          2 |         16 |         77 |
+| Profile                                                                                  |          8 |        434 |         13 |         51 |        498 |
++------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                 | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\laragon\www\market_place\resources\js\Pages\Auth\ForgotPassword.vue                   | Vue      |        -34 |          0 |         -8 |        -42 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\Login.vue                            | Vue      |        -61 |         -1 |        -11 |        -73 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\Register.vue                         | Vue      |        -55 |         -7 |         -6 |        -68 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\ResetPassword.vue                    | Vue      |        -46 |          0 |        -11 |        -57 |
+| c:\laragon\www\market_place\resources\js\Pages\Auth\Welcome.vue                          | Vue      |         -4 |          0 |         -3 |         -7 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Achats.vue                        | Vue      |        146 |          4 |         10 |        160 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Articles.vue                      | Vue      |        198 |          3 |         19 |        220 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\ArticlesManagment\Details.vue     | Vue      |         59 |          2 |         16 |         77 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Commandes.vue                     | Vue      |        127 |          3 |          8 |        138 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Dashboard.vue                     | Vue      |         20 |          0 |         10 |         30 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Fournisseur.vue                   | Vue      |        188 |          3 |         12 |        203 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile.vue                       | Vue      |        265 |          6 |         18 |        289 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\Delete-Account.vue        | Vue      |         43 |          1 |          0 |         44 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\New-contact.vue           | Vue      |         42 |          1 |          4 |         47 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\add-phone.vue             | Vue      |         82 |          5 |         23 |        110 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\change-password.vue       | Vue      |         38 |          1 |          0 |         39 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\changes-account-infos.vue | Vue      |         59 |          4 |          4 |         67 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\entreprise-connected.vue  | Vue      |         28 |          1 |          0 |         29 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\form-address.vue          | Vue      |         62 |          0 |          9 |         71 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Profile\form-user.vue             | Vue      |         80 |          0 |         11 |         91 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\Ventes.vue                        | Vue      |        149 |          3 |         12 |        164 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\managment.vue                     | Vue      |         20 |          0 |          4 |         24 |
+| c:\laragon\www\market_place\resources\js\Pages\Private\sell-and-buy.vue                  | Vue      |         20 |          0 |          4 |         24 |
+| Total                                                                                    |          |      1,426 |         29 |        125 |      1,580 |
++------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

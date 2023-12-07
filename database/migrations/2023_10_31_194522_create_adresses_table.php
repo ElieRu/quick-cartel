@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('commune', 50)->nullable();
             $table->string('quartier', 50)->nullable();
             $table->string('avenue', 50)->nullable();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

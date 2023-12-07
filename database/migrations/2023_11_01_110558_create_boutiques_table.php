@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nom', 50)->nullable();
             $table->string('url', 225)->nullable();
             $table->string('description', 225)->nullable();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('adresse_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('adresse_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

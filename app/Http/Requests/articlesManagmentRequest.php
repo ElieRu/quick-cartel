@@ -23,9 +23,9 @@ class articlesManagmentRequest extends FormRequest
     {
         return [
             'nom' => 'required|min:4|max:50',
-            'prix' => 'required|min:3|max:10',
             'categorie' => 'required',
             'specification' => 'required',
+            'prix' => 'required',
             'devise' => 'required',
         ];
     }
@@ -36,16 +36,11 @@ class articlesManagmentRequest extends FormRequest
             'nom.required' => 'Le nom est requis',
             'nom.min' => 'Pas moins de 4 caractères',
             'nom.max' => 'Pas plus de 50 caractères',
-
-            'prix.required' => 'Le prix est requis',
-            'prix.min' => 'Pas moins de 3 caractères',
-            'prix.max' => 'Pas plus de 10 chiffres',
             
             'categorie.required' => 'La catégorie est réquise',
-            // 'prix.regex' => '...',
+            
             'specification.required' => 'La spécification est réquise',
 
-            'devise.required' => 'La devise est requise',
         ];
     }
 }

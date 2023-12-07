@@ -13,13 +13,9 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('article_id')->constrained();
-            $table->integer('qtte')->nullable();
-            $table->integer('prix')->nullable();
-            $table->string('statut', 50)->nullable();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('devise_id')->constrained();
-            $table->foreignId('paiement_id')->constrained();
+            // $table->foreignId('article_id')->nullable()->constrained();
+            // $table->integer('qtte')->nullable();
+            // $table->integer('prix')->nullable();
             $table->timestamps();
         });
     }

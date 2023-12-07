@@ -30,5 +30,8 @@
       {{-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> --}}
       {{-- <script src="{{ Vite::asset('resources/css/js/popover.js') }}"></script> --}}
       {{-- <script id="bs-live-reload" data-sseport="50032" data-lastchange="1696394595390" src="{{ Vite::asset('resources/css/js/livereload.js') }}"></script> --}}
+
+      
+      {{-- <script type="text/javascript" src="https://fr.monetbil.com/widget/v2/monetbil.min.js"></script> --}}
   
 </html>

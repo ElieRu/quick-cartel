@@ -16,9 +16,6 @@ return new class extends Migration
             $table->integer('qtte')->nullable();
             $table->integer('prix')->nullable();
             $table->string('statut', 50)->nullable();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('devise_id')->constrained();
-            $table->foreignId('fournisseur_id')->constrained();
             $table->timestamps();
         });
     }

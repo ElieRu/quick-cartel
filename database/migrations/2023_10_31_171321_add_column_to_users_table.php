@@ -16,7 +16,6 @@ return new class extends Migration
             $table->date('date_de_naissance')->nullable()->after('name');
             $table->string('sexe', 10)->nullable()->after('name');
             $table->string('profession', 50)->nullable()->after('name');
-            $table->string('mdp', 60)->nullable()->after('name');
             $table->string('phone', 13)->nullable()->after('name');
             $table->binary('image')->nullable()->after('name');
         });

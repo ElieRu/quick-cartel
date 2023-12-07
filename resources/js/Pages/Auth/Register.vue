@@ -44,7 +44,7 @@
             <div class="mt-3 mb-2"><button class="btn btn-primary link-light border-0 shadow" type="submit" style="width: 100%;">Connexion</button></div>
         </form>
         <div class="text-center mb-2">
-            <Link class="link-primary" href="/login" style="text-decoration: none;">Mot de passe oublié?</Link>
+            <Link class="link-primary" href="/login" style="text-decoration: none;">Vous avez un compte? Connectez-vous!</Link>
         </div>
     </div>
 </div>

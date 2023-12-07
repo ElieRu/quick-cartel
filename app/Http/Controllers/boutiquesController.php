@@ -5,19 +5,39 @@ namespace App\Http\Controllers;
 use App\Http\Requests\boutiqueRequest;
 use App\Http\Requests\updateBoutiqueRequest;
 use App\Models\Adresse;
+use App\Models\Article;
 use App\Models\Boutique;
+use App\Models\Commande;
+use App\Models\Fournisseur;
+use App\Models\Requisition;
+use App\Models\User;
+use App\Models\Vente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class boutiquesController extends Controller
 {
     public function show () 
     {
+        try {
+            $idBoutique = Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id;
+        } catch (\Throwable $th) {
+            $idBoutique = null;
+        }
+
+        $adresse = DB::table('adresses')
+            ->where('user_id', '=', Auth::id())
+            // ->where('fournisseur_id', '=', null)
+            ->where('boutique_id', '=', $idBoutique)
+            ->select('adresses.*')
+            ->get();
+
         return Inertia::render('Public/Boutiques', [
             'boutique' => Boutique::where('user_id', '=', Auth::id())->get(),
-            'adresse' => Adresse::where('user_id', '=', Auth::id())->get()
+            'adresse' => $adresse
         ]);
     }
 
@@ -33,25 +53,80 @@ class boutiquesController extends Controller
             'description' => $request->description,
             'user_id' => Auth::id()
         ]);
+        return to_route('home');
     }
 
     public function update (Boutique $boutique, updateBoutiqueRequest $request)
     {
-        $boutique = DB::table('boutiques')
-                    ->where('user_id', Auth::id())
-                    ->update([
-                        'nom' => $request->nom,
-                        'email' => $request->email,
-                        'phone' => $request->phone,
-                        'url' => $request->url,
-                        'description' => $request->description
-                    ]);
+        DB::table('boutiques')
+            ->where('user_id', Auth::id())
+            ->update([
+                'nom' => $request->nom,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                // 'url' => $request->url,
+                'description' => $request->description
+            ]);
     }
 
     public function delete (Request $request)
     {
-        $data = Boutique::findOrFail($request->id);
-        $data->delete();
+        $user = User::find(Auth::id());
+        if (Hash::check($request->password, $user->password)) {
+
+            $adresse = Adresse::where('boutique_id', '=', $request->id);
+            $adresse->delete();
+
+            $requisitions = Requisition::where('boutique_id', '=', $request->id);
+            $requisitions->delete();
+
+            $ventes = Vente::where('boutique_id', '=', $request->id);
+            $ventes->delete();
+
+
+            $articles = Article::where('boutique_id', '=', $request->id);
+            $articles->delete();
+            
+            // notifications
+            $commandes = Commande::where('boutique_id', '=', $request->id);
+            $commandes->delete();
+
+            
+
+            // $Descriptions = Vente::where('article_id', '=', $request->id);
+            // $Descriptionptions->delete();
+
+            
+            // Descriptions
+            $fournisseurs = Fournisseur::where('boutique_id', '=', $request->id);
+            $fournisseurs->delete();
+            // 
+            // abonnements
+            // adresses
+
+            $adresses = Adresse::where('boutique_id', '=', $request->id);
+            $adresses->delete();
+            
+            $data = Boutique::findOrFail($request->id);
+            $data->delete();
+            
+            return to_route('home');
+        }
+    }
+
+    public function boutiqueProfileImg (Request $request)
+    {
+        dd('bien');
+        
+        $idBtk = Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id;
+
+        $request['img'] = $request->file('img')->store('profile', 'public');
+
+        DB::table('boutiques')
+            ->where('id', '=', $idBtk)
+            ->update([
+                'img' => $request['img']
+            ]);
     }
     
 }

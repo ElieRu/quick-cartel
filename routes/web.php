@@ -2,21 +2,30 @@
 
 use App\Http\Controllers\aboutController;
 use App\Http\Controllers\accountController;
+use App\Http\Controllers\achatsController;
 use App\Http\Controllers\AdresseController;
 use App\Http\Controllers\articlesController;
-use App\Http\Controllers\articlesManagmentController;
 use App\Http\Controllers\authenticationController;
 use App\Http\Controllers\boutiquesController;
-use App\Http\Controllers\buyingController;
+use App\Http\Controllers\clientsController;
+use App\Http\Controllers\clientUserExistantController;
+use App\Http\Controllers\clientUtilisateurController;
+use App\Http\Controllers\commandesController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\detailsController;
+use App\Http\Controllers\fournisseursController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\paypalCtr;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\promotionsController;
-use App\Http\Controllers\sellingController;
+use App\Http\Controllers\requisitionsController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\ventesController;
+use Faker\Provider\Payment;
 use Illuminate\Support\Facades\Route;
+
+use function Laravel\Prompts\search;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,92 +63,96 @@ Route::get('/about', [aboutController::class, 'show'])->name('about');
 
 
 Route::middleware(['auth'])->group(function () {
+
+
+    Route::post('paypal', [paypalCtr::class, 'paypal'])->name('paypal');
+    Route::get('success', [paypalCtr::class, 'success'])->name('success');
+    Route::get('cancel', [paypalCtr::class, 'cancel'])->name('cancel');
+
+
+
     Route::get('/dashboard', [dashboardController::class, 'show'])->name('dashboard');
     
+    Route::get('/articles', [articlesController::class, 'show'])->name('articles.show');
+    Route::post('/articles', [articlesController::class, 'create'])->name('articlesManagment');
+    Route::put('/articles', [articlesController::class, 'update'])->name('articlesManagment');
+    Route::delete('/articles', [articlesController::class, 'remove'])->name('articlesManagment');    
     
-    
-    Route::get('/boutique/articles', [articlesController::class, 'show'])->name('articles.show');
-    Route::post('/boutique/articles', [articlesController::class, 'store'])->name('articlesManagment');
-    Route::put('/boutique/articles', [articlesController::class, 'update'])->name('articlesManagment');
-    Route::delete('/boutique/articles', [articlesController::class, 'remove']);
-
-
-    
-    Route::get('/articles/details', [detailsController::class, 'index'])->name('articlesManagment');
-    Route::post('/articles/save-details', [detailsController::class, 'store']);
-    Route::delete('/articles/delete-details', [detailsController::class, 'remove']);
+    Route::get('/articles/{id}', [detailsController::class, 'index']);
+    Route::post('/articles/details', [detailsController::class, 'store']);
+    Route::put('/articles/details', [detailsController::class, 'update']);
+    Route::delete('/articles/details', [detailsController::class, 'remove']);
 
     
-    // Route::post('/articles/description', [articlesManagmentController::class, 'image']);
-    Route::post('/articles/catacters', [articlesManagmentController::class, 'caracters'])->name('caracters');
+    // achats
+    Route::get('/achats', [achatsController::class, 'show'])->name('achats.show');
+    Route::post('/achats', [achatsController::class, 'create'])->name('achats.create');
+    Route::put('/achats', [achatsController::class, 'put'])->name('achats.put');
+    Route::delete('/achats', [achatsController::class, 'delete'])->name('achats.delete');
+
+
+    // ventes
+    Route::get('/ventes', [ventesController::class, 'show'])->name('ventes.show');
+    Route::put('/ventes', [ventesController::class, 'put'])->name('ventes.put');
+    Route::delete('/ventes', [ventesController::class, 'delete'])->name('ventes.delete');
+    Route::post('/ventes', [ventesController::class, 'create'])->name('ventes.delete');
+    Route::get('/ventes/historique', [ventesController::class, 'historique'])->name('ventes.historique');
+    
+
+    // commandes
+    Route::get('/commandes', [commandesController::class, 'show'])->name('commandes.show');
+    Route::post('/commandes', [commandesController::class, 'create'])->name('commandes.create');
+    Route::put('/commandes', [commandesController::class, 'put'])->name('commandes.put');
+    Route::delete('/commandes', [commandesController::class, 'delete'])->name('commandes.delete');
+
+
+    // Tous les fournisseurs
+    Route::get('/fournisseurs', [fournisseursController::class, 'show'])->name('fournisseurs.show');
+    Route::post('/fournisseurs', [fournisseursController::class, 'create'])->name('fournisseurs.create');
+    Route::put('/fournisseurs', [fournisseursController::class, 'put'])->name('fournisseurs.put');
+    Route::delete('/fournisseurs', [fournisseursController::class, 'delete'])->name('fournisseurs.delete');
+    Route::get('/fournisseurs/{id}', [fournisseursController::class, 'moreInfos'])->name('fournisseur.informations.show');
 
     
+    // Tous les clients
+    Route::get('/clients', [clientsController::class, 'show'])->name('clients.show');
+    Route::post('/clients', [clientsController::class, 'create'])->name('clients.create');
+    Route::get('/clients/{id}', [clientsController::class, 'showInfos'])->name('clients.informations.show');
+    Route::put('/clients', [clientsController::class, 'put'])->name('clients.put');
+    Route::put('/clients-profile', [clientsController::class, 'uploadProfile'])->name('client.upload.profile');
+    Route::delete('/clients', [clientsController::class, 'delete'])->name('clients.delete');
     
-    Route::get('/buying', [buyingController::class, 'show'])->name('buying');
-    Route::get('/selling', [sellingController::class, 'show'])->name('selling');
+    
+    Route::get('/client-utilisateur', [clientUtilisateurController::class, 'index'])->name('client.existant');
+    Route::get('/joindre-client-existant', [clientsController::class, 'joindreClientExistant'])->name('joindre.client.existant');
+    
+    
+    // Les réquisitions
+    // Route::get('/requisitions', [requisitionsController::class, 'index']);
+    Route::post('/requisitions', [requisitionsController::class, 'create']);
+    Route::put('/requisitions', [requisitionsController::class, 'update']);
+    Route::delete('/requisitions', [requisitionsController::class, 'delete']);
+
+
     Route::get('/profile', [profileController::class, 'show'])->name('profile');
-
-    
     Route::post('/profile', [profileController::class, 'update']);
-    
-    
-    Route::post('/adresse', [AdresseController::class, 'show'])->name('adresse');
-    Route::post('/adresseCreate', [AdresseController::class, 'update'])->name('adresse.update');
 
-    
+
+    // Adresse....
+    Route::get('/adresse', [AdresseController::class, 'get'])->name('adresse.get');
+    Route::post('/adresse', [AdresseController::class, 'create'])->name('adresse.create');
+    Route::put('/adresse', [AdresseController::class, 'update'])->name('adresse.update');
+    Route::delete('/adresse', [AdresseController::class, 'delete'])->name('adresse.delete');
+
+
     Route::post('/contact', [contactController::class, 'create'])->name('contact');
-    Route::delete('/remove-contact', [contactController::class, 'remove'])->name('contact');
-
-
-
-    // 
     Route::post('/userInformations', [userController::class, 'userInformations']);
 
+    Route::post('/boutique-profile-img', [boutiquesController::class, 'boutiqueProfileImg']);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::get('/boutique', [boutiquesController::class, 'show'])->name('boutique.show');
-Route::post('/boutique', [boutiquesController::class, 'create'])->name('boutique.create');
-Route::put('/boutique', [boutiquesController::class, 'update'])->name('boutique.update');
-Route::delete('/boutique', [boutiquesController::class, 'delete'])->name('boutique.delete');
-
+    Route::get('/boutique', [boutiquesController::class, 'show'])->name('boutique.show');
+    Route::post('/boutique', [boutiquesController::class, 'create'])->name('boutique.create');
+    Route::put('/boutique', [boutiquesController::class, 'update'])->name('boutique.update');
+    Route::delete('/boutique', [boutiquesController::class, 'delete'])->name('boutique.delete');
 
 });

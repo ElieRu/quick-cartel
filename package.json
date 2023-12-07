@@ -15,11 +15,14 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/vue3": "^1.0.12",
         "@vitejs/plugin-vue": "^4.2.3",
         "@vuelidate/core": "^2.0.3",
         "@vuelidate/validators": "^2.0.4",
         "email-validator": "^2.0.4",
+        "inertia": "^0.0.7",
+        "inertiajs": "^0.0.0",
         "pinia": "^2.1.7",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1",

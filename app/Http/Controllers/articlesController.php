@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\articlesManagmentRequest;
 use App\Models\Article;
+use App\Models\Boutique;
 use App\Models\Categorie;
-use App\Models\Devisemonetaire;
+use App\Models\Client;
+use App\Models\Description;
+use App\Models\Detail;
+use App\Models\Requisition;
 use App\Models\Specification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,51 +18,67 @@ use Inertia\Inertia;
 
 class articlesController extends Controller
 {
-    public function show (Article $article, Categorie $categorie, Specification $specification)
+    public function show ()
     {
-        // $articles = DB::table('articles')
-            // ->join('categories', 'categories.id', '=', 'articles.categorie_id')
-            // ->join('specifications', 'specifications.id', '=', 'categories.specification_id')
-            // ->join('devisemonetaires', 'devisemonetaires.id', '=', 'articles.monetaire_id')
-            // ->select('articles.id', 'articles.nom', 'articles.user_id', 'categories.designation AS categorie', 'specifications.nom AS specification', 'articles.prix', 'devisemonetaires.symbole')
-            // ->get();
+        $articles = DB::table('articles')
+            ->where('articles.user_id', '=', Auth::id())
+            // ->join('boutiques', 'boutiques.user_id', '=', Auth::id())
+            ->join('categories', 'categories.id', '=', 'articles.categorie_id')
+            ->join('specifications', 'specifications.id', '=', 'articles.specification_id')
+            ->select('articles.*', 'categories.nom As catNom', 'specifications.nom As specNom')
+            ->get();
+
+        $boutique_id = Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id;
 
         return Inertia::render('Private/Articles', [
-            'articles' => $article->where('user_id', Auth::id()),
+            'articles' => $articles,
             'categories' => Categorie::all(),
             'specifications' => Specification::all(),
-            // 'devise_monetaires' => Devisemonetaire::all()
+            'clients' => Client::where('boutique_id', '=', $boutique_id)->get()
         ]);
     }
 
-    public function store (articlesManagmentRequest $request, Article $article) 
+    public function create (articlesManagmentRequest $request, Article $article) 
     {
+        $boutique_id = Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id;
+  
         Article::create([
             'nom' => $request->nom,
             'prix' => $request->prix,
+            'devise' => $request->devise,
             'user_id' => Auth::id(),
             'categorie_id' => $request->categorie,
             'specification_id' => $request->specification,
-            'monetaire_id' => $request->devise,
+            'boutique_id' => $boutique_id
         ]);
+
     }
 
     public function update (articlesManagmentRequest $request, Article $article)
     {
-        $article->nom = $request->nom;
-        $article->prix = $request->prix;
-        $article->devise = $request->devise;
-        $article->categorie_id = $request->categorie;
-        $article->specification_id = $request->specification;
-        $article->user_id = Auth::id();
-
-        $article->save();
+        DB::table('articles')
+            ->where('id', $request->id)
+            ->update([
+                'nom' => $request->nom, 
+                'prix' => $request->prix,
+                'devise' => $request->devise,
+                'categorie_id' => $request->categorie_id, 
+                'specification_id' => $request->specification_id, 
+                'description' => $request->description,
+            ]);
     }
 
     public function remove (Request $request)
     {
-        $data = Article::findOrFail($request->id);
-        $data->delete();
+
+        $requisitions = Requisition::where('article_id', '=', $request->id);
+        $requisitions->delete();
+
+        $Description = Descriptionption::where('article_id', '=', $request->id);
+        $description->delete();
+        
+        $article = Article::findOrFail($request->id);
+        $article->delete();
     }
 
     public function searching (Article $article, Request $request)

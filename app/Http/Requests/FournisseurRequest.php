@@ -24,7 +24,7 @@ class FournisseurRequest extends FormRequest
         return [
             'nom' => 'required|min: 4|max: 50',
             'email' => '',
-            'phone' => 'required|string|digits:9',
+            'phone' => '',
         ];
     }
 

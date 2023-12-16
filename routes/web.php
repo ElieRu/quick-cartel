@@ -8,7 +8,6 @@ use App\Http\Controllers\articlesController;
 use App\Http\Controllers\authenticationController;
 use App\Http\Controllers\boutiquesController;
 use App\Http\Controllers\clientsController;
-use App\Http\Controllers\clientUserExistantController;
 use App\Http\Controllers\clientUtilisateurController;
 use App\Http\Controllers\commandesController;
 use App\Http\Controllers\contactController;
@@ -16,13 +15,14 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\detailsController;
 use App\Http\Controllers\fournisseursController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\liensController;
 use App\Http\Controllers\paypalCtr;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\promotionsController;
 use App\Http\Controllers\requisitionsController;
+use App\Http\Controllers\reservationsController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\ventesController;
-use Faker\Provider\Payment;
 use Illuminate\Support\Facades\Route;
 
 use function Laravel\Prompts\search;
@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // ventes
-    Route::get('/ventes', [ventesController::class, 'show'])->name('ventes.show');
+    Route::get("/ventes", [ventesController::class, 'show'])->name('ventes.show');
     Route::put('/ventes', [ventesController::class, 'put'])->name('ventes.put');
     Route::delete('/ventes', [ventesController::class, 'delete'])->name('ventes.delete');
     Route::post('/ventes', [ventesController::class, 'create'])->name('ventes.delete');
@@ -106,10 +106,18 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/commandes', [commandesController::class, 'delete'])->name('commandes.delete');
 
 
+    // reservations
+    Route::get('/reservations', [reservationsController::class, 'show'])->name('reservations.show');
+    Route::post('/reservations', [reservationsController::class, 'create'])->name('reservations.create');
+    Route::put('/reservations', [reservationsController::class, 'put'])->name('reservations.put');
+    Route::delete('/reservations', [reservationsController::class, 'delete'])->name('reservations.delete');
+
+
     // Tous les fournisseurs
     Route::get('/fournisseurs', [fournisseursController::class, 'show'])->name('fournisseurs.show');
     Route::post('/fournisseurs', [fournisseursController::class, 'create'])->name('fournisseurs.create');
     Route::put('/fournisseurs', [fournisseursController::class, 'put'])->name('fournisseurs.put');
+    Route::put('/fournisseurs-profile', [fournisseursController::class, 'uploadProfile'])->name('fournisseurs.upload.profile');
     Route::delete('/fournisseurs', [fournisseursController::class, 'delete'])->name('fournisseurs.delete');
     Route::get('/fournisseurs/{id}', [fournisseursController::class, 'moreInfos'])->name('fournisseur.informations.show');
 
@@ -121,6 +129,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/clients', [clientsController::class, 'put'])->name('clients.put');
     Route::put('/clients-profile', [clientsController::class, 'uploadProfile'])->name('client.upload.profile');
     Route::delete('/clients', [clientsController::class, 'delete'])->name('clients.delete');
+
+    // Tous les contacts
+    Route::get('/contacts', [contactController::class, 'show'])->name('contacts.show');
+    Route::post('/contacts', [contactController::class, 'create'])->name('contacts.create');
+    Route::put('/contacts', [contactController::class, 'update'])->name('contacts.put');
+    Route::delete('/contacts', [contactController::class, 'remove'])->name('contacts.delete');
     
     
     Route::get('/client-utilisateur', [clientUtilisateurController::class, 'index'])->name('client.existant');
@@ -145,6 +159,13 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/adresse', [AdresseController::class, 'delete'])->name('adresse.delete');
 
 
+    // liens....
+    Route::get('/liens', [liensController::class, 'show'])->name('liens.show');
+    Route::post('/liens', [liensController::class, 'create'])->name('liens.create');
+    Route::put('/liens', [liensController::class, 'update'])->name('liens.update');
+    Route::delete('/liens', [liensController::class, 'delete'])->name('liens.delete');
+
+
     Route::post('/contact', [contactController::class, 'create'])->name('contact');
     Route::post('/userInformations', [userController::class, 'userInformations']);
 
@@ -156,3 +177,4 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/boutique', [boutiquesController::class, 'delete'])->name('boutique.delete');
 
 });
+

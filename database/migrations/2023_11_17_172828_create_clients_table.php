@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nom', 50)->nullable();
             $table->string('postnom', 50)->nullable();
             $table->string('email', 50)->nullable();
-            $table->string('phone', 10)->nullable();
             $table->string('adresse', 50)->nullable();
             $table->foreignId('boutique_id')->nullable()->constrained();
             $table->timestamps();

@@ -9,8 +9,6 @@ use App\Models\Client;
 use App\Models\Detail;
 use App\Models\Specification;
 use App\Models\Vente;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,21 +16,32 @@ use Inertia\Inertia;
 
 class ventesController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $articles = DB::table('articles')
-            ->where('articles.user_id', '=', Auth::id())
-            // ->where('articles.qtte', '>=', 1)
+        $trieCommande = $request->action ? $request->action : 'ventes';
+        $boutique_id = Boutique::where('user_id', Auth::id())->get('id')[0]->id;
+
+        $articles = Article::query()
+            ->when($trieCommande, function ($query, $trieCommande) {
+                if ($trieCommande == 'commande') {
+                    $query->where('articles.qtte', '<=', 0);
+                    $query->orWhere('articles.qtte', '=', null);
+                } else {
+                    $query->where('articles.qtte', '>=', 1);
+                }
+            })
+            ->where('articles.user_id', Auth::id())
+            ->where('articles.boutique_id', $boutique_id)
             ->join('categories', 'categories.id', '=', 'articles.categorie_id')
             ->join('specifications', 'specifications.id', '=', 'articles.specification_id')
             ->select('articles.*', 'categories.nom As catNom', 'specifications.nom As specNom')
             ->get();
-        
-        // dd($articles);
 
-        $boutique_id = Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id;
+
+        $action = $request->action ? $request->action : 'vente';
 
         return Inertia::render('Private/Ventes', [
+            'default_action' => $request->action,
             'articles' => $articles,
             'categories' => Categorie::all(),
             'specifications' => Specification::all(),
@@ -48,9 +57,6 @@ class ventesController extends Controller
         $boutique_id = Boutique::where('user_id', '=', Auth::id())->get()[0]->id;
 
         $vente = Vente::create([
-            // 'detail_id' =>
-            // 'total' => 
-            // 'moyen_paiement' => 
             'boutique_id' => $boutique_id,
             'client_id' => $client_id
         ]);
@@ -58,11 +64,6 @@ class ventesController extends Controller
         $vente_id = Vente::where('boutique_id', '=', $boutique_id)
             ->where('client_id', '=', $client_id)
             ->get()->last()->id;
-
-        // La validation de chaque formulaire doit se faire ici...
-        $derniereVente = Vente::all()->last() ? Vente::all()->last()->numero : 0;
-
-        $numeroDerniereVente = $derniereVente + 1;
 
         for ($i = 0; $i < count($selectionDarticles); $i++) {
             $stockDisponible = Article::where('id', '=', $selectionDarticles[$i]['id'])->get('qtte')[0]->qtte;
@@ -81,7 +82,7 @@ class ventesController extends Controller
                     'article_id' => $selectionDarticles[$i]['id'],
                     'qtte' => $selectionDarticles[$i]['qtteVente'],
                     'prixUnitaire' => $selectionDarticles[$i]['prix'],
-                    'prixTotal' => $selectionDarticles[$i]['prix'] * $selectionDarticles[$i]['qtte'],
+                    'prixTotal' => $selectionDarticles[$i]['prix'] * $selectionDarticles[$i]['qtteVente'],
                     'devise' => $selectionDarticles[$i]['devise'],
                     'vente_id' => $vente_id
                 ]);
@@ -117,7 +118,7 @@ class ventesController extends Controller
             // ->when('client_id', '=', $request->client_id)
             ->join('details', 'details.vente_id', '=', 'ventes.id')
             ->get();
-            
+
         $groupByDetails = $ventes->groupBy('vente_id');
 
         return Inertia::render('Private/Historique', [

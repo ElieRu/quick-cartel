@@ -38,10 +38,14 @@
                                         {{ article.qtte ? article.qtte : 0 }} article{{ article.qtte > 1 ? 's' : ''
                                         }}</span>
                                 </div>
+                                <div class="d-flex justify-content-between mb-2"><span style="font-size: 13px;">Quantité en
+                                        résérvation</span><span class="text-body-secondary" style="font-size: 13px;">
+                                        {{ article.qtteEnReservation ? article.qtteEnReservation : 0 }} article{{ article.qtte > 1 ? 's' : ''
+                                        }}</span>
+                                </div>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div>
-
                                     <button
                                         class="btn btn-primary btn-sm link-body-emphasis bg-body-secondary border-0 shadow-none"
                                         type="button" style="height: 35px; width: 35px;"><svg
@@ -98,6 +102,12 @@
                                             placeholder="Recherche" data-bs-theme="light" /></div>
                                 </div>
                                 <div>
+                                    <select>
+                                        <option value="Ventes">Ventes</option>
+                                        <option value="Réservations">Réservations</option>
+                                        <option value="Réquisitions">Réquisitions</option>
+
+                                    </select>
                                     <button ref="monButton"
                                         class="btn btn-primary btn-sm link-light border-0 d-flex align-items-center"
                                         type="button" data-bs-target="#requisition" data-bs-toggle="modal">

@@ -22,11 +22,11 @@ class articlesManagmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'required|min:4|max:50',
+            'nom' => 'required',
             'categorie' => 'required',
             'specification' => 'required',
-            'prix' => 'required',
-            'devise' => 'required',
+            // 'prix' => 'required',
+            // 'devise' => 'required',
         ];
     }
 

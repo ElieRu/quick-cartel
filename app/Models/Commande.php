@@ -9,6 +9,6 @@ class Commande extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['article_id', 'qtte', 'client_id', 'numero', 'devise', 'prixTotal', 'dateDisponible', 'prix', 'boutique_id'];
+    protected $fillable = ['client_id', 'statut', 'dateDisponible', 'boutique_id', 'client_id'];
     
 }

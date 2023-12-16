@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::table('commandes', function (Blueprint $table) {
             $table->date('dateDisponible')->nullable();
-            $table->integer('prixTotal')->nullable();
-            $table->string('statut', 50)->nullable('En attente');
-            $table->foreignId('client_id')->nullable()->constrained();
+            // $table->integer('prixTotal')->nullable();
+            $table->string('statut', 50)->nullable();
+            $table->foreignId('client_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');;
         });
     }
 

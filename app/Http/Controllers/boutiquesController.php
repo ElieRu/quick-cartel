@@ -8,6 +8,7 @@ use App\Models\Adresse;
 use App\Models\Article;
 use App\Models\Boutique;
 use App\Models\Commande;
+use App\Models\Contact;
 use App\Models\Fournisseur;
 use App\Models\Requisition;
 use App\Models\User;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Mockery\Undefined;
 
 class boutiquesController extends Controller
 {
@@ -28,6 +30,12 @@ class boutiquesController extends Controller
             $idBoutique = null;
         }
 
+        $contacts = Contact::where('boutique_id', $idBoutique)
+            ->where('client_id', null)
+            ->where('user_id', null)
+            ->where('fournisseur_id', null)
+            ->get();
+
         $adresse = DB::table('adresses')
             ->where('user_id', '=', Auth::id())
             // ->where('fournisseur_id', '=', null)
@@ -35,8 +43,15 @@ class boutiquesController extends Controller
             ->select('adresses.*')
             ->get();
 
-        return Inertia::render('Public/Boutiques', [
-            'boutique' => Boutique::where('user_id', '=', Auth::id())->get(),
+        $boutique = Boutique::where('user_id', Auth::id())->exists();
+
+        if ($boutique) {
+            $boutique = Boutique::where('user_id', Auth::id())->get()[0];
+        }
+        
+        return Inertia::render('Private/Boutiques', [
+            'boutique' => $boutique,
+            'contacts' => $contacts,
             'adresse' => $adresse
         ]);
     }

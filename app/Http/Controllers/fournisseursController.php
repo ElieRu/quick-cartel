@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FournisseurRequest;
 use App\Models\Boutique;
+use App\Models\Contact;
 use App\Models\Fournisseur;
+use App\Models\Lien;
 use App\Models\Requisition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,7 @@ class fournisseursController extends Controller
 {
     private $fournisseurs;
 
-    public function show (Request $request)
+    public function show(Request $request)
     {
         try {
             $boutique_id = Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id;;
@@ -23,49 +25,75 @@ class fournisseursController extends Controller
             $boutique_id = null;
         }
 
-        $query = $request->get('search');
-
         return Inertia::render('Private/Fournisseur', [
-            'fournisseurs' => Fournisseur::where("nom", "LIKE", "%{$query}%")
-                        ->where('boutique_id', '=', $boutique_id)
-                        ->where('boutique_id', '=', $boutique_id)->get()
+            'fournisseurs' => Fournisseur::query()
+                ->when($request->search, function ($query, $search) {
+                    $query->where('nom', 'like', "%{$search}%");
+                })
+                ->where('boutique_id', '=', $boutique_id)
+                ->where('boutique_id', '=', $boutique_id)
+                ->select()
+                ->paginate(15)
+                ->withQueryString()
         ]);
     }
 
-    public function create (FournisseurRequest $request)
+    public function create(FournisseurRequest $request)
     {
         Fournisseur::create([
             'nom' => $request->nom,
-            'email' => $request->email,
-            'phone' => $request->phone,
             'boutique_id' => Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id,
         ]);
     }
 
-    public function put (FournisseurRequest $request)
+    public function put(FournisseurRequest $request)
     {
         DB::table('fournisseurs')
             ->where('id', '=', $request->id)
             ->update([
                 'nom' => $request->nom,
                 'email' => $request->email,
-                'phone' => $request->phone,
+                'type' => $request->type,
+                'adresse' => $request->adresse
             ]);
     }
 
-    public function delete (Request $request)
+    public function uploadProfile(Request $request)
     {
-        $requisitions = Requisition::where('fournisseur_id', '=', $request->id);
-        $requisitions->delete();
+        if ($request->hasFile('image')) {
 
-        $fournisseur = Fournisseur::findOrFail($request->id);
-        $fournisseur->delete();
+            $file = $request->file('image');
+            $image = $file->store('profile', 'public');
+
+            Fournisseur::where('id', $request->id)
+                ->update([
+                    'photo' => $image
+                ]);
+        }
     }
 
-    public function moreInfos (Request $request) 
+    public function delete(Request $request)
     {
-        $idBoutique = Boutique::where('user_id', '=', Auth::id())->get('id')[0]->id;
-        $fournisseur = Fournisseur::where('id', '=', $request->id)->get();
+        if (is_integer($request->id)) {
+            Fournisseur::findOrFail($request->id)->delete();
+            return to_route('fournisseurs.show');
+        } else {
+            foreach ($request->id as $value) {
+                Fournisseur::findOrFail($value)->delete();
+            }
+        }
+    }
+
+    public function moreInfos(Request $request)
+    {
+        $idBoutique = Boutique::where('user_id', Auth::id())->get('id')[0]->id;
+        $fournisseur = Fournisseur::where('id', $request->id)->get();
+
+        $contacts = Contact::where('fournisseur_id', $request->id)
+            ->where('boutique_id', null)
+            ->where('user_id', null)
+            ->where('client_id', null)
+            ->get();
 
         $requisitions = DB::table('requisitions')
             ->where('fournisseur_id', '=', $request->id)
@@ -73,10 +101,13 @@ class fournisseursController extends Controller
             ->select('requisitions.*')
             ->get();
 
+        $liens = Lien::where('fournisseur_id', $request->id)->get();
 
         return Inertia::render('Private/FournisseurInfos', [
-            'requisitions' => $requisitions
+            'fournisseur' => $fournisseur[0],
+            'requisitions' => $requisitions,
+            'contacts' => $contacts,
+            'liens' => $liens
         ]);
     }
-
 }

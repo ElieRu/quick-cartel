@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
 
-    <div class="container" style="padding-top: 15px;" v-if="boutique.length !== 0">
+    <div class="container" style="padding-top: 15px;" v-if="boutique">
         <div class="row d-block d-md-flex">
             <div class="col-12 col-md-8">
                 <div>
@@ -37,7 +37,7 @@
 
 
                                 <div class="d-flex flex-column" style="margin-left: 15px;margin-top: 10px;"><span
-                                        class="fw-bold">#MPlace officiel</span><span style="font-size: 11px;">2.9k
+                                        class="fw-bold">{{ boutique.nom }}</span><span style="font-size: 11px;">2.9k
                                         abonné(és)</span></div>
                             </div>
                             <div class="d-flex flex-column justify-content-end"
@@ -54,9 +54,7 @@
                             <div class="row d-block d-md-flex">
                                 <div class="col">
                                     <div>
-                                        <div class="mb-2"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;" for="nom">Nom
-                                                de l&#39;entreprise</label>
+                                        <div class="mb-2">
                                             <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
                                                 style="overflow: hidden;"><input id="nom" v-model="update.nom"
                                                     class="border-0 shadow-none form-control form-control-sm" type="text"
@@ -69,9 +67,7 @@
 
                                 <div class="col">
                                     <div>
-                                        <div class="mb-2"><label id="birthday-1" class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="sexe">Numéro de téléphone</label>
+                                        <div class="mb-2">
                                             <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
                                                 style="overflow: hidden;"><input id="phone" v-model="update.phone"
                                                     class="border-0 shadow-none form-control form-control-sm" type="tel"
@@ -84,9 +80,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <div class="mb-2"><label class="form-label"
-                                            style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                            for="postnom">Adresse mail</label>
+                                    <div class="mb-2">
                                         <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
                                             style="overflow: hidden;"><input id="postnom" v-model="update.email"
                                                 class="border-0 shadow-none form-control form-control-sm" type="email"
@@ -118,22 +112,20 @@
                     <div class="bg-body border rounded border-0 shadow" style="padding: 10px;margin-bottom: 15px;">
                         <form method="post" @submit.prevent="formAdresse.id == null ?
                             formAdresse.post('/adresse', {
-                                onSuccess: () => { 
+                                onSuccess: () => {
                                     this.successAdress = true
                                     this.successUpdate = false
                                 }
                             }) : formAdresse.put('/adresse', {
-                                onSuccess: () => { 
+                                onSuccess: () => {
                                     this.successAdress = false
                                     this.successUpdate = true
-                                 }
+                                }
                             })">
                             <div class="row d-block d-md-flex">
                                 <div class="col">
                                     <div>
-                                        <div class="mb-2"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="ville">Ville</label>
+                                        <div class="mb-2">
                                             <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
                                                 style="overflow: hidden;"><input id="ville" v-model="formAdresse.ville"
                                                     class="border-0 shadow-none form-control form-control-sm" type="text"
@@ -141,9 +133,7 @@
                                                 style="font-size: 12px;" v-if="formAdresse.errors.ville">{{
                                                     formAdresse.errors.ville }}</span>
                                         </div>
-                                        <div class="mb-2"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="commune">Commune</label>
+                                        <div class="mb-2">
                                             <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
                                                 style="overflow: hidden;"><input id="commune" v-model="formAdresse.commune"
                                                     class="border-0 shadow-none form-control form-control-sm" type="text"
@@ -155,9 +145,7 @@
                                 </div>
                                 <div class="col">
                                     <div>
-                                        <div class="mb-2"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="quartier">Quartier</label>
+                                        <div class="mb-2">
                                             <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
                                                 style="overflow: hidden;"><input id="quartier"
                                                     v-model="formAdresse.quartier"
@@ -166,9 +154,7 @@
                                                 class="text-primary" style="font-size: 12px;"
                                                 v-if="formAdresse.errors.quartier">{{ formAdresse.errors.quartier }}</span>
                                         </div>
-                                        <div class="mb-2"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="adress">Avenue</label>
+                                        <div class="mb-2">
                                             <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
                                                 style="overflow: hidden;"><input id="Avenue" v-model="formAdresse.avenue"
                                                     class="border-0 shadow-none form-control form-control-sm" type="text"
@@ -214,7 +200,7 @@
         </div>
     </div>
 
-    <div id="boutique-empty" style="position: absolute;height: 77%;width: 100%;" v-if="boutique.length === 0">
+    <div id="boutique-empty" style="position: absolute;height: 77%;width: 100%;" v-if="!boutique">
         <div class="container" style="padding-top: 15px;height: 100%;">
             <div class="bg-body border rounded border-0 shadow d-flex flex-column justify-content-center align-items-center"
                 style="height: 100%;width: 100%;padding: 10px;">
@@ -279,6 +265,7 @@
         </div>
     </div>
 
+    <!-- <Contact v-if="this.boutique" :contacts="contacts" fournisseur="" user="" client="" :boutique="boutique"></Contact> -->
 
     <div id="new-boutique-modal" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
@@ -290,8 +277,7 @@
                 <div class="modal-body border-0">
                     <div class="d-flex flex-column align-items-center">
                         <form style="width: 100%;" @submit.prevent="createBoutique(form)">
-                            <div class="mb-2" style="width: 100%;"><span class="text-body-secondary">Le nom de votre
-                                    boutique</span>
+                            <div class="mb-2" style="width: 100%;">
                                 <div class="border rounded d-flex align-items-center" style="overflow: hidden;"><input
                                         class="bg-transparent border-0 shadow-none form-control form-control-sm" type="text"
                                         placeholder="Le nom de votre boutique" v-model="form.nom"
@@ -317,7 +303,7 @@
     </div>
 
 
-    <div class="container d-flex" v-if="boutique.length !== 0">
+    <div class="container d-flex" v-if="boutique">
 
         <div class="container">
             <div class="container">
@@ -342,55 +328,57 @@
 <script>
 
 import Header from '../../Components/Header/Header.vue';
+import ListContact from './Contacts/ListContact.vue';
+import FormContact from './Contacts/FormContact.vue';
 import { Link, useForm, router } from "@inertiajs/vue3";
-import { ref } from "vue";
-import axios from "axios";
 
 
 const hide = document.getElementsByClassName("modal-backdrop fade show")
 
 export default {
-    components: { Header },
-
-    setup(props) {
-        const form = useForm({
-            nom: null,
-            description: null
-        })
-
-        const update = useForm({
-            nom: props.boutique.length === 1 ? props.boutique[0].nom : null,
-            email: props.boutique.length === 1 ? props.boutique[0].email : null,
-            phone: props.boutique.length === 1 ? props.boutique[0].phone : null,
-            description: props.boutique.length === 1 ? props.boutique[0].description : null
-        })
-
-        const formAdresse = useForm({
-            id: props.adresse.length === 1 ? props.adresse[0].id : null,
-            ville: props.adresse.length === 1 ? props.adresse[0].ville : null,
-            commune: props.adresse.length === 1 ? props.adresse[0].commune : null,
-            quartier: props.adresse.length === 1 ? props.adresse[0].quartier : null,
-            avenue: props.adresse.length === 1 ? props.adresse[0].avenue : null,
-            boutique_id: props.boutique.length === 1 ? props.boutique[0].id : null
-        })
-
-        const deleteBtk = useForm({
-            id: props.boutique.length ? props.boutique[0].id : null,
-            password: null
-        })
-
-        const profileImg = useForm({
-            img: null
-        })
-
-        return { form, update, formAdresse, deleteBtk, profileImg }
+    components: {
+        Header,
+        ListContact,
+        FormContact
+    },
+    mounted() {
+        // console.log(this.boutique);
     },
 
-    props: ['boutique', 'adresse'],
+    props: ['boutique', 'adresse', 'contacts'],
 
     data() {
         return {
-            // adresse: adresse[0],
+
+            form: useForm({
+                nom: null,
+                description: null
+            }),
+
+            update: useForm({
+                nom: this.boutique.length === 1 ? this.boutique[0].nom : null,
+                email: this.boutique.length === 1 ? this.boutique[0].email : null,
+                phone: this.boutique.length === 1 ? this.boutique[0].phone : null,
+                description: this.boutique.length === 1 ? this.boutique[0].description : null
+            }),
+
+            formAdresse: useForm({
+                id: this.adresse.length === 1 ? this.adresse[0].id : null,
+                ville: this.adresse.length === 1 ? this.adresse[0].ville : null,
+                commune: this.adresse.length === 1 ? this.adresse[0].commune : null,
+                quartier: this.adresse.length === 1 ? this.adresse[0].quartier : null,
+                avenue: this.adresse.length === 1 ? this.adresse[0].avenue : null,
+                boutique_id: this.boutique.length === 1 ? this.boutique[0].id : null
+            }),
+
+            deleteBtk: useForm({
+                id: this.boutique.id ? this.boutique.id : null,
+                password: null
+            }),
+
+            profileImg: useForm({
+                img: null
+            }),
             success: false,
             successAdress: false,
             deleteSuccess: false

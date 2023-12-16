@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class contactRequest extends FormRequest
+class liensRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,8 @@ class contactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'phone' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            // 
+            'site' => 'required',
+            'lien' => 'required|url'
         ];
     }
 }

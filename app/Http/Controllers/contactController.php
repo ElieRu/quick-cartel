@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\contactRequest;
-use App\Models\c;
 use App\Models\Contact;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class contactController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function show()
     {
         //
     }
@@ -21,27 +19,29 @@ class contactController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(contactRequest $request, Contact $contact)
+    public function create(contactRequest $request)
     {
-        Contact::create([
+        $contact = Contact::create([
             'phone' => $request->phone,
-            'user_id' => Auth::id()
+            'client_id' => $request->client_id,
+            'user_id' => $request->user_id,
+            'boutique_id' => $request->boutique_id,
+            'fournisseur_id' => $request->fournisseur_id,
         ]);
-
-        dd('redirect me and revieuw the regex');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store()
+    
+    public function update(Request $request)
     {
-        //
+        $update = Contact::find($request->id)
+                        ->update([
+                            'phone' => $request->phone,
+                            'type' => $request->type,
+                        ]);
     }
 
     public function remove (Request $request)
     {
-        $data = Contact::findOrFail($request->id);
-        $data->delete();
+        $delete = Contact::findOrFail($request->id)->delete();
     }
 }

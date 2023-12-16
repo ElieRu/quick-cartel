@@ -23,22 +23,22 @@
                     </div>
                     <div style="margin-top: 10px;width: 100%;">
 
-                        <div class="d-flex flex-column" v-if="props.user.name || props.user.postnom"><span
-                                style="font-size: 12px;">Nom &amp; Postnom</span><span style="font-size: 13px;"
-                                class="text-capitalize">{{ props.user.name }} {{ props.user.postnom }}</span></div>
+                        <div class="d-flex flex-column" v-if="user.name || user.postnom"><span style="font-size: 12px;">Nom
+                                &amp; Postnom</span><span style="font-size: 13px;" class="text-capitalize">{{ user.name }}
+                                {{ user.postnom }}</span></div>
 
-                        <div class="d-flex flex-column" v-if="props.user.email" style="margin-top: 15px;"><span
+                        <div class="d-flex flex-column" v-if="user.email" style="margin-top: 15px;"><span
                                 style="font-size: 12px;">Adresse
-                                mail</span><span style="font-size: 13px;" class="text-lowercase">{{ props.user.email
+                                mail</span><span style="font-size: 13px;" class="text-lowercase">{{ user.email
                                 }}</span></div>
 
-                        <div class="d-flex flex-column" v-if="props.user.sexe" style="margin-top: 15px;">
+                        <div class="d-flex flex-column" v-if="user.sexe" style="margin-top: 15px;">
                             <span style="font-size: 12px;">Sexe
-                            </span><span class="text-capitalize" style="font-size: 13px;">{{ props.user.sexe }}</span>
+                            </span><span class="text-capitalize" style="font-size: 13px;">{{ user.sexe }}</span>
                         </div>
-                        <div class="d-flex flex-column" v-if="props.user.profession" style="margin-top: 15px;"><span
+                        <div class="d-flex flex-column" v-if="user.profession" style="margin-top: 15px;"><span
                                 style="font-size: 12px;">Profession</span>
-                            <span class="text-capitalize" style="font-size: 13px;">{{ props.user.profession }}</span>
+                            <span class="text-capitalize" style="font-size: 13px;">{{ user.profession }}</span>
                         </div>
                     </div>
                 </div>
@@ -154,6 +154,8 @@
                         </form>
                     </div>
 
+                    <Contact :contacts="contacts" fournisseur="" :user="user" boutique="" client=""></Contact>
+
                     <div class="bg-body border rounded border-0 shadow" style="padding: 10px;margin-bottom: 15px;">
                         <form method="post" @submit.prevent="formAddr.post('/adresse')">
                             <div class="row d-block d-md-flex">
@@ -253,6 +255,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -260,36 +263,62 @@
     </div>
 </template>
     
-<script setup>
-import Header from '../../Components/Header/header.vue';
+<script>
+import Header from '../../Components/Header/Header.vue';
 
 import { useForm } from '@inertiajs/vue3'
-// import NewContact from './New-contact.vue'
+import Contact from './Contacts.vue'
 
-const props = defineProps(['user', 'address'])
+export default {
+    components: { Header, Contact },
+    props: ['user', 'address', 'contacts'],
+    mounted() { },
+    data() {
+        return {
+            form: useForm({
+                id: this.user.id,
+                name: this.user.name,
+                postnom: this.user.postnom,
+                email: this.user.email,
+                date_de_naissance: this.user.date_de_naissance,
+                sexe: this.user.sexe,
+                profession: this.user.profession,
+            }),
 
-const form = useForm({
-    id: props.user.id,
-    name: props.user.name,
-    postnom: props.user.postnom,
-    email: props.user.email,
-    date_de_naissance: props.user.date_de_naissance,
-    sexe: props.user.sexe,
-    profession: props.user.profession,
-})
+            formAddr: useForm({
+                id: this.address.id,
+                ville: this.address.ville,
+                commune: this.address.commune,
+                quartier: this.address.quartier,
+                avenue: this.address.avenue
+            }),
 
-const formAddr = useForm({
-    id: props.address.id,
-    ville: props.address.ville,
-    commune: props.address.commune,
-    quartier: props.address.quartier,
-    avenue: props.address.avenue
-})
+            userPhone: useForm({
+                // phone: this.user.phone
+            }),
+        }
+    },
+    methods: {
+        formSubmitContact() {
+            this.formContact.post('/contacts', {
+                onSuccess: () => {
+                    this.$refs.buttonContact.click()
+                }
+            })
+        },
 
-const userPhone = useForm({
-    phone: props.user.phone
-})
+        updateContact(contact) {
+            this.formContact.phone = contact.phone,
+                this.formContact.type = contact.type,
+                this.formContact.id = contact.id
+            this.formContact.put('/contacts')
+        },
 
-
+        deleteContact(id) {
+            this.formContact.id = id
+            this.formContact.delete('/contacts')
+        }
+    }
+}
 
 </script>

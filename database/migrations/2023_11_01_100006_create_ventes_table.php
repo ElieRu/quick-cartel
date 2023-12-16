@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ventes', function (Blueprint $table) {
             $table->id();
             // $table->foreignId('detail_id')->nullable()->constrained();
-            $table->integer('prixTotal')->nullable();
+            // $table->integer('prixTotal')->nullable();
             // $table->foreignId('client_id')->nullable()->constrained();
             // $table->foreignId('boutique_id')->nullable()->constrained();
             $table->timestamps();

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fournisseurs', function (Blueprint $table) {
+        Schema::create('liens', function (Blueprint $table) {
             $table->id();
-            $table->binary('photo', 2048)->nullable();
-            $table->string('nom', 50)->nullable();
-            $table->string('email', 50)->nullable();
-            $table->string('type', 50)->nullable();
-            $table->string('adresse', 50)->nullable();
+            $table->string('site', 50)->nullable();
+            $table->string('lien', 225)->nullable();
+            $table->foreignId('fournisseur_id')->nullable()->constrained();
+            $table->foreignId('boutique_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('liens');
     }
 };

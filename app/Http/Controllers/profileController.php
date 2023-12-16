@@ -6,17 +6,23 @@ use App\Http\Requests\userRequest;
 use App\Models\Adresse;
 use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class profileController extends Controller
 {
-    public function show (Adresse $address, Contact $contact) {
-        // dd(Auth::user());
+    public function show (Request $request) {
+        $contacts = Contact::where('user_id', Auth::id())
+            ->where('boutique_id', null)
+            ->where('client_id', null)
+            ->where('fournisseur_id', null)
+            ->get();
+
         return Inertia::render('Private/Profile', [
             'user' => Auth::user(),
             'address' => Adresse::where('user_id', Auth::id())->exists() ? Adresse::where('user_id', Auth::id())->get()[0] : '',
-            // 'contact' => Contact::where('user_id', Auth::id())->exists() ? Contact::where('user_id', Auth::id())->get() : ''
+            'contacts' => $contacts
         ]);
     }
 

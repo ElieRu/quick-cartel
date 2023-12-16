@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ventes', function (Blueprint $table) {
-            $table->foreignId('client_id')
-            ->nullable()
-            ->constrained()
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->foreignId('fournisseur_id')->nullable()->constrained();
         });
     }
 
@@ -25,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ventes', function (Blueprint $table) {
+        Schema::table('contacts', function (Blueprint $table) {
             //
         });
     }

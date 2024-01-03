@@ -87,5 +87,7 @@ class reservationsController extends Controller
     {}
 
     public function delete ()
-    {}
+    {
+        dd('bien');
+    }
 }

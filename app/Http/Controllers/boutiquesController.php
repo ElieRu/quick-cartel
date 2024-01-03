@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\boutiqueRequest;
 use App\Http\Requests\updateBoutiqueRequest;
-use App\Models\Adresse;
 use App\Models\Article;
 use App\Models\Boutique;
 use App\Models\Commande;
 use App\Models\Contact;
 use App\Models\Fournisseur;
+use App\Models\Lien;
 use App\Models\Requisition;
 use App\Models\User;
 use App\Models\Vente;
@@ -36,23 +36,18 @@ class boutiquesController extends Controller
             ->where('fournisseur_id', null)
             ->get();
 
-        $adresse = DB::table('adresses')
-            ->where('user_id', '=', Auth::id())
-            // ->where('fournisseur_id', '=', null)
-            ->where('boutique_id', '=', $idBoutique)
-            ->select('adresses.*')
-            ->get();
-
         $boutique = Boutique::where('user_id', Auth::id())->exists();
 
         if ($boutique) {
             $boutique = Boutique::where('user_id', Auth::id())->get()[0];
         }
+
+        $liens = Lien::where('boutique_id', $idBoutique)->get();
         
         return Inertia::render('Private/Boutiques', [
             'boutique' => $boutique,
             'contacts' => $contacts,
-            'adresse' => $adresse
+            'liens' => $liens
         ]);
     }
 
@@ -78,8 +73,6 @@ class boutiquesController extends Controller
             ->update([
                 'nom' => $request->nom,
                 'email' => $request->email,
-                'phone' => $request->phone,
-                // 'url' => $request->url,
                 'description' => $request->description
             ]);
     }
@@ -88,9 +81,6 @@ class boutiquesController extends Controller
     {
         $user = User::find(Auth::id());
         if (Hash::check($request->password, $user->password)) {
-
-            $adresse = Adresse::where('boutique_id', '=', $request->id);
-            $adresse->delete();
 
             $requisitions = Requisition::where('boutique_id', '=', $request->id);
             $requisitions->delete();
@@ -119,9 +109,6 @@ class boutiquesController extends Controller
             // abonnements
             // adresses
 
-            $adresses = Adresse::where('boutique_id', '=', $request->id);
-            $adresses->delete();
-            
             $data = Boutique::findOrFail($request->id);
             $data->delete();
             

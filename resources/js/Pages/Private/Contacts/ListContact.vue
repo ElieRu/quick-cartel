@@ -30,7 +30,8 @@
                                 <option value="Domicile">Domicile</option>
                                 <option value="Travail">Travail</option>
                             </select></div>
-                        <div class="border-secondary-subtle d-flex flex-row align-items-center"><button
+                        <div class="border-secondary-subtle d-flex flex-row align-items-center">
+                            <button :disabled="disabled"
                                 class="btn btn-primary btn-sm link-light border-0 shadow-sm" type="submit"
                                 style="width: 100%;">Mettre à jour</button></div>
                     </form>
@@ -51,6 +52,7 @@ export default {
     },
     data() {
         return {
+            disabled: false,
             formContact: useForm({
                 id: '',
                 phone: '',
@@ -65,15 +67,23 @@ export default {
     methods: {
         deleteContact(id) {
             this.formContact.id = id
-            this.formContact.delete('/contacts')
+            this.formContact.delete(
+                '/contacts', {
+                preserveScroll: true
+                }
+            )
         },
 
         updateContact(contact) {
+            this.disabled = true
             this.formContact.phone = contact.phone,
             this.formContact.type = contact.type,
             this.formContact.id = contact.id
             this.formContact.put('/contacts', {
+                preserveScroll: true,
                 onSuccess: () => {
+                    this.disabled = false
+                    
                     this.formContact.phone = ''
                     this.formContact.type = ''
                 }

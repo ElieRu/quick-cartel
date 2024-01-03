@@ -19,11 +19,13 @@
                                     style="width: 100px;height: 100px;margin-top: -50px;border-radius: 100%;padding: 2px;overflow: hidden;border: 1.5px dashed var(--bs-gray-500);">
                                     <div
                                         style="width: 100%;height: 100%;background: var(--bs-gray-600);border-radius: 100%;">
-                                        <img style="width: 100%;height: 100%;border-radius: 100%;" src="jpg/img logo.jpg" />
+                                        <img style="width: 100%;height: 100%;border-radius: 100%;" :src="'/storage/' + boutique.img" />
                                     </div>
                                 </div>
-                                <label
-                                    class="form-label bg-body shadow-sm d-flex flex-column justify-content-center align-items-center"
+
+                                <button
+                                    @click="putLogoBoutique"
+                                    class="form-label border-0 bg-body shadow-sm d-flex flex-column justify-content-center align-items-center"
                                     style="cursor: pointer;height: 25px;width: 25px;border-radius: 100%;margin-top: 13px;margin-left: 75px;position: absolute;"
                                     for="profile-logo-boutique"><svg xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor"
@@ -32,8 +34,10 @@
                                         <path
                                             d="M194.6 32H317.4C338.1 32 356.4 45.22 362.9 64.82L373.3 96H448C483.3 96 512 124.7 512 160V416C512 451.3 483.3 480 448 480H64C28.65 480 0 451.3 0 416V160C0 124.7 28.65 96 64 96H138.7L149.1 64.82C155.6 45.22 173.9 32 194.6 32H194.6zM256 384C309 384 352 341 352 288C352 234.1 309 192 256 192C202.1 192 160 234.1 160 288C160 341 202.1 384 256 384z">
                                         </path>
-                                    </svg></label>
-                                <input id="profile-logo-boutique" type="file" accept="image/*" style="display: none;" />
+                                    </svg>
+                                </button>
+
+                                <input id="profile-logo-boutique" ref="inputLogoBoutique" type="file" accept="image/*" style="display: none;" />
 
 
                                 <div class="d-flex flex-column" style="margin-left: 15px;margin-top: 10px;"><span
@@ -106,72 +110,6 @@
                             </div>
                         </form>
                     </div>
-
-
-
-                    <div class="bg-body border rounded border-0 shadow" style="padding: 10px;margin-bottom: 15px;">
-                        <form method="post" @submit.prevent="formAdresse.id == null ?
-                            formAdresse.post('/adresse', {
-                                onSuccess: () => {
-                                    this.successAdress = true
-                                    this.successUpdate = false
-                                }
-                            }) : formAdresse.put('/adresse', {
-                                onSuccess: () => {
-                                    this.successAdress = false
-                                    this.successUpdate = true
-                                }
-                            })">
-                            <div class="row d-block d-md-flex">
-                                <div class="col">
-                                    <div>
-                                        <div class="mb-2">
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="ville" v-model="formAdresse.ville"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Ville" name="ville" /></div><span class="text-primary"
-                                                style="font-size: 12px;" v-if="formAdresse.errors.ville">{{
-                                                    formAdresse.errors.ville }}</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="commune" v-model="formAdresse.commune"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Commune" name="commune" inputmode="url" /></div><span
-                                                class="text-primary" style="font-size: 12px;"
-                                                v-if="formAdresse.errors.commune">{{ formAdresse.errors.commune }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div>
-                                        <div class="mb-2">
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="quartier"
-                                                    v-model="formAdresse.quartier"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Quartier" name="quartier" /></div><span
-                                                class="text-primary" style="font-size: 12px;"
-                                                v-if="formAdresse.errors.quartier">{{ formAdresse.errors.quartier }}</span>
-                                        </div>
-                                        <div class="mb-2">
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="Avenue" v-model="formAdresse.avenue"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Avenue" name="avenue" /></div><span class="text-primary"
-                                                style="font-size: 12px;" v-if="formAdresse.errors.avenue">{{
-                                                    formAdresse.errors.avenue }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="mt-2"><button class="btn btn-primary btn-sm link-light"
-                                        type="submit">Personnalisez</button></div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
 
@@ -196,8 +134,11 @@
                             </svg><span class="text-body-secondary" style="font-size: 12px;">Aucun abonné.</span></div>
                     </div>
                 </div>
+
+
             </div>
         </div>
+
     </div>
 
     <div id="boutique-empty" style="position: absolute;height: 77%;width: 100%;" v-if="!boutique">
@@ -265,8 +206,6 @@
         </div>
     </div>
 
-    <!-- <Contact v-if="this.boutique" :contacts="contacts" fournisseur="" user="" client="" :boutique="boutique"></Contact> -->
-
     <div id="new-boutique-modal" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -302,6 +241,21 @@
         </div>
     </div>
 
+    <div class="container bg-body p-2" v-if="boutique">
+        <button
+            class="btn btn-primary btn-sm bg-dark-subtle border-1 border-dark-subtle shadow-none d-flex justify-content-center align-items-center"
+            type="button" data-bs-target="#lien-form" data-bs-toggle="modal" ref="buttonFormLien"
+            style="margin-right: 6px;height: 31px;width: 32px;"><svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
+                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                    d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z">
+                </path>
+            </svg></button>
+
+        <FormLien @hide-form-link="hideLinkForm" :boutique_id="boutique.id"></FormLien>
+        <ListLiens :liens="liens"></ListLiens>
+    </div>
 
     <div class="container d-flex" v-if="boutique">
 
@@ -317,7 +271,19 @@
                     <div v-if="deleteSuccess"> Mot de passe incorrecte </div>
                     <button type="submit">Supprimer</button>
                 </form>
+
+                <button class="btn btn-primary btn-sm link-primary bg-transparent" type="button"
+                    data-bs-target="#contact-form" ref="buttonContact" data-bs-toggle="modal">Ajouter un contact</button>
+
             </div>
+
+
+
+            <FormContact @hide-form-contact="hideFormContact" :contacts="contacts" fournisseur="" user=""
+                :boutique="boutique" client=""></FormContact>
+
+            <ListContact :contacts="contacts" :boutique="boutique"></ListContact>
+
         </div>
 
 
@@ -330,6 +296,8 @@
 import Header from '../../Components/Header/Header.vue';
 import ListContact from './Contacts/ListContact.vue';
 import FormContact from './Contacts/FormContact.vue';
+import ListLiens from './Liens/ListLiens.vue';
+import FormLien from './Liens/FormLien.vue';
 import { Link, useForm, router } from "@inertiajs/vue3";
 
 
@@ -339,13 +307,15 @@ export default {
     components: {
         Header,
         ListContact,
-        FormContact
+        FormContact,
+        ListLiens,
+        FormLien,
     },
     mounted() {
         // console.log(this.boutique);
     },
 
-    props: ['boutique', 'adresse', 'contacts'],
+    props: ['boutique', 'contacts', 'liens'],
 
     data() {
         return {
@@ -360,15 +330,6 @@ export default {
                 email: this.boutique.length === 1 ? this.boutique[0].email : null,
                 phone: this.boutique.length === 1 ? this.boutique[0].phone : null,
                 description: this.boutique.length === 1 ? this.boutique[0].description : null
-            }),
-
-            formAdresse: useForm({
-                id: this.adresse.length === 1 ? this.adresse[0].id : null,
-                ville: this.adresse.length === 1 ? this.adresse[0].ville : null,
-                commune: this.adresse.length === 1 ? this.adresse[0].commune : null,
-                quartier: this.adresse.length === 1 ? this.adresse[0].quartier : null,
-                avenue: this.adresse.length === 1 ? this.adresse[0].avenue : null,
-                boutique_id: this.boutique.length === 1 ? this.boutique[0].id : null
             }),
 
             deleteBtk: useForm({
@@ -398,6 +359,18 @@ export default {
             const myAtt = document.querySelector("body")
             myAtt.removeAttribute('style')
             div.remove();
+        },
+
+        putLogoBoutique() {
+            // 
+        },
+
+        hideFormContact() {
+            this.$refs.buttonContact.click()
+        },
+
+        hideLinkForm() {
+            this.$refs.buttonFormLien.click()
         }
     }
 

@@ -12,12 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('promotions', function (Blueprint $table) {
-            // $table->id();
-            $table->foreignId('article_id')->nullable()->constrained();
-            // $table->string('type', 50)->nullable();
+            $table->id();
+            $table->string('nom', 50)->nullable();
             $table->date('dateDebut')->nullable();
             $table->date('dateFin')->nullable();
-            $table->string('statut', 10)->nullable();
+            $table->string('type', 50)->nullable();
+            $table->boolean('statut')->nullable();
+            $table->integer('pourcentage')->nullable();
+            $table->string('description', 225)->nullable();
+            $table->integer('montantReduction')->nullable();
+            $table->foreignId('article_id')->nullable()->constrained();
             $table->foreignId('boutique_id')->nullable()->constrained();
             $table->timestamps();
         });

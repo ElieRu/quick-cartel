@@ -9,5 +9,5 @@ class Requisition extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['article_id', 'qtte', 'date', 'montant', 'devise', 'boutique_id', 'fournisseur_id'];
+    protected $fillable = ['article_id', 'qtte', 'date', 'montant', 'statut', 'devise', 'boutique_id', 'fournisseur_id'];
 }

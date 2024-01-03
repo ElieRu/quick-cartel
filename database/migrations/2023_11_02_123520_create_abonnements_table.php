@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('abonnements', function (Blueprint $table) {
             $table->id();
             $table->integer('nombre')->nullable();
-            $table->foreignId('boutique_id')->constrained();
+            $table->boolean('action')->nullable();
+            $table->foreignId('boutique_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

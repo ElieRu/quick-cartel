@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('boutiques', function (Blueprint $table) {
             $table->id();
             $table->string('nom', 50)->nullable();
-            $table->string('url', 225)->nullable();
             $table->string('description', 225)->nullable();
+            $table->string('adresse', 50)->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('adresse_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

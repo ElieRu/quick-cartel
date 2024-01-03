@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\userRequest;
-use App\Models\Adresse;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,7 +20,6 @@ class profileController extends Controller
 
         return Inertia::render('Private/Profile', [
             'user' => Auth::user(),
-            'address' => Adresse::where('user_id', Auth::id())->exists() ? Adresse::where('user_id', Auth::id())->get()[0] : '',
             'contacts' => $contacts
         ]);
     }

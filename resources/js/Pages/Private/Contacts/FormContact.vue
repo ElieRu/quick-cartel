@@ -30,7 +30,13 @@
 import { useForm } from '@inertiajs/vue3'
 
 export default {
-    props: ['user', 'contacts', 'client', 'boutique', 'fournisseur'],
+    props: {
+        user: '',
+        contacts: '',
+        client: '',
+        boutique: '',
+        fournisseur: ''
+    },
     emits: ['hide-form-contact'],
     mounted() {
         // console.log(this.user);
@@ -65,6 +71,7 @@ export default {
     methods: {
         formSubmitContact() {
             this.formContact.post('/contacts', {
+                preserveScroll: true,
                 onSuccess: () => {
                     this.formContact.phone = ''
                     this.formContact.type = ''

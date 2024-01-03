@@ -24,7 +24,6 @@ class updateBoutiqueRequest extends FormRequest
         return [
             'nom' => 'required|min:4|max:50',
             'email' => 'email|max: 50',
-            'phone' => 'min:10|max:13',
             'url' => 'min:4|max:225|url',
             'description' => 'required|min:4|max:225',
         ];

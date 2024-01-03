@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom', 50)->nullable();
             $table->integer('prix')->nullable();
+            $table->integer('prixPromotion')->nullable();
             $table->integer('qtte')->nullable();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();

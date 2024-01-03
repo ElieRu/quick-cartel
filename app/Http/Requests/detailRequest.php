@@ -22,8 +22,8 @@ class detailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'required|min:4|max:50',
-            'valeur' => 'required|min:4|max:50',
+            'nom' => 'required',
+            'valeur' => 'required',
         ];
     }
 

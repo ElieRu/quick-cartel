@@ -225,7 +225,8 @@ export default {
                 search: this.search
             }, {
                 preserveState: true,
-                replace: true
+                replace: true,
+                preserveScroll: true,
             })
         }
     },

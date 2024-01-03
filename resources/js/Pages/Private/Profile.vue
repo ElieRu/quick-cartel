@@ -154,69 +154,6 @@
                         </form>
                     </div>
 
-                    <Contact :contacts="contacts" fournisseur="" :user="user" boutique="" client=""></Contact>
-
-                    <div class="bg-body border rounded border-0 shadow" style="padding: 10px;margin-bottom: 15px;">
-                        <form method="post" @submit.prevent="formAddr.post('/adresse')">
-                            <div class="row d-block d-md-flex">
-                                <div class="col">
-                                    <div>
-                                        <div class="mb-3"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="ville">Ville</label>
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="ville"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Ville*" name="ville" v-model="formAddr.ville" /></div>
-                                            <div class="text-primary" style="font-size: 11px;" v-if="formAddr.errors.ville">
-                                                {{ formAddr.errors.ville }}</div>
-                                        </div>
-                                        <div class="mb-3"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="commune">Commune</label>
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="commune"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Commune*" name="commune" v-model="formAddr.commune" />
-                                            </div>
-                                            <div class="text-primary" style="font-size: 11px;"
-                                                v-if="formAddr.errors.commune">{{ formAddr.errors.commune }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div>
-                                        <div class="mb-3"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="quartier">Quartier</label>
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="quartier"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Quartier*" name="quartier" v-model="formAddr.quartier" />
-                                            </div>
-                                            <div class="text-primary" style="font-size: 11px;"
-                                                v-if="formAddr.errors.quartier">{{ formAddr.errors.quartier }}</div>
-                                        </div>
-                                        <div class="mb-3"><label class="form-label"
-                                                style="font-size: 12px;margin-bottom: 2px;margin-left: 5px;"
-                                                for="adress">Avenue</label>
-                                            <div class="border rounded border-1 border-secondary-subtle d-flex flex-row align-items-center"
-                                                style="overflow: hidden;"><input id="Avenue"
-                                                    class="border-0 shadow-none form-control form-control-sm" type="text"
-                                                    placeholder="Avenue*" name="avenue" v-model="formAddr.avenue" /></div>
-                                            <div class="text-primary" style="font-size: 11px;">{{ formAddr.errors.avenue }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div><button class="btn btn-primary btn-sm link-light" type="submit">Personnalisez</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
                     <div class="bg-body border rounded border-0 shadow" style="padding: 10px;margin-bottom: 15px;">
                         <div class="d-flex flex-column">
                             <div class="d-flex justify-content-between" style="margin-bottom: 10px;"><span
@@ -256,6 +193,12 @@
                         </div>
                     </div>
 
+                    <button class="btn btn-primary btn-sm link-primary bg-transparent" type="button"
+                        data-bs-target="#contact-form" ref="buttonContact" data-bs-toggle="modal"
+                        style="width: 48%;">Ajouter un contact</button>
+                    <FormContact @hide-form-contact="hideFormContact" :contacts="contacts" fournisseur="" :user="user" boutique="" client=""></FormContact>
+                    <ListContact :contacts="contacts" :user="user"></ListContact>
+
                 </div>
             </div>
         </div>
@@ -267,11 +210,16 @@
 import Header from '../../Components/Header/Header.vue';
 
 import { useForm } from '@inertiajs/vue3'
-import Contact from './Contacts.vue'
+import FormContact from './Contacts/FormContact.vue'
+import ListContact from './Contacts/ListContact.vue'
 
 export default {
-    components: { Header, Contact },
-    props: ['user', 'address', 'contacts'],
+    components: {
+        Header,
+        FormContact,
+        ListContact
+    },
+    props: ['user', 'contacts'],
     mounted() { },
     data() {
         return {
@@ -284,15 +232,7 @@ export default {
                 sexe: this.user.sexe,
                 profession: this.user.profession,
             }),
-
-            formAddr: useForm({
-                id: this.address.id,
-                ville: this.address.ville,
-                commune: this.address.commune,
-                quartier: this.address.quartier,
-                avenue: this.address.avenue
-            }),
-
+            
             userPhone: useForm({
                 // phone: this.user.phone
             }),
@@ -317,7 +257,11 @@ export default {
         deleteContact(id) {
             this.formContact.id = id
             this.formContact.delete('/contacts')
-        }
+        },
+
+        hideFormContact() {
+            this.$refs.buttonContact.click()
+        },
     }
 }
 

@@ -1,16 +1,27 @@
 
 <template>
     <div id="call-menu-navbar" class="offcanvas offcanvas-start" tabindex="-1">
+        
         <div class="offcanvas-header d-flex flex-column" style="padding: 22px;">
-            <div class="bg-body-secondary border rounded-pill border-0 d-flex justify-content-between align-items-center"
-                style="width: 100%;font-size: 10px;padding: 10px;padding-right: 15px;">
+            <button 
+            
+            @click="myAccount"
+
+            v-if = "infos.user"
+            :disabled = "!this.boutique_id"
+            class="bg-body-secondary border rounded-pill border-0 d-flex justify-content-between align-items-center"
+            style="width: 100%;font-size: 10px;padding: 10px;padding-right: 15px;"
+                >
                 <div class="d-flex align-items-center">
                     <div
                         style="height: 40px;width: 40px;border-radius: 100%;border: 1px dashed var(--bs-gray-700);padding: 1px;">
 
-                        <img v-if="infos.user && infos.user.image !== null" class="rounded-circle border-0" width="100%"
-                            height="100%" src="/images/img_profile1.jpg" />
-
+                        <img v-if="infos.user.image" 
+                            class="rounded-circle border-0" 
+                            style="width: 100%; height:100%;"
+                            :src="'/storage/' + infos.user.image"
+                        />
+                        
                         <svg v-if="infos.user == false || infos.user.image == null" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style="font-size: 36px;">
 
@@ -26,14 +37,15 @@
                             style="font-size: 12px;">
                             {{ infos.user.name ? infos.user.name : "Vous n'etes pas connecté" }} {{ infos.user.postnom }}
                         </span><span style="font-size: 10px;">
-                            {{ infos.user.profession ? infos.user.profession : '...' }}
+                            {{ boutique_name ? boutique_name : '' }}
                         </span></span>
-                </div><button class="btn-close shadow-none" type="button" aria-label="Close"
+                </div><button class="btn-close shadow-none" ref="closeMenu" type="button" aria-label="Close"
                     data-bs-target="#call-menu-navbar" data-bs-toggle="offcanvas"></button>
-            </div>
+            </button>
         </div>
-        <div class="offcanvas-body d-flex flex-column pt-0">
 
+
+        <div class="offcanvas-body d-flex flex-column pt-0">
 
             <ul v-if="infos.user" class="nav nav-pills flex-column mb-auto">
                 <li v-if="infos.boutique.length == 0" style="background-color: aquamarine;" id="link-menu" class="nav-item">
@@ -185,20 +197,29 @@
                 <a href="/login">Connectez-vous</a>
             </div>
         </div>
+
     </div>
 </template>
 
 <script>
 
+import { Link, router } from "@inertiajs/vue3"
 import axios from 'axios'
 
 export default {
+    components: {
+        Link
+    },
     data() {
         return {
             infos: {
                 user: '',
                 boutique: '',
             },
+
+            boutique_name: '',
+            boutique_id: '',
+
             unAuth: ''
         }
     },
@@ -206,8 +227,17 @@ export default {
         await axios.post('/userInformations').then((resp) => {
             this.infos.user = resp.data.user ? resp.data.user : false
             this.infos.boutique = resp.data.boutique ? resp.data.boutique : false
+            
         }).catch((err) => {
             this.unAuth = err.response.data.message
+        })
+
+        await axios.get('/menu').then((resp) => {
+            this.boutique_name = resp.data.boutique[0].nom;
+            this.boutique_id = resp.data.boutique[0].id;
+        }).catch((err) => {
+            this.boutique_name = false
+            this.boutique_id = false
         })
     },
     methods: {
@@ -216,6 +246,11 @@ export default {
                 window.location.replace('/')
             })
         },
+
+        myAccount () {
+            this.$refs.closeMenu.click()
+            router.get('/account', { id: this.boutique_id })
+        }
     }
 }
 

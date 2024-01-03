@@ -60,7 +60,7 @@
                                         class="border rounded-circle border-0" style="width: 100%;height: 100%;"
                                         src="images/img_profile1.jpg" /></span><span class="d-flex flex-column"
                                     style="text-align: left;margin-left: 10px;font-size: 13px;overflow: hidden;margin-right: 10px;"><span
-                                        id="span-profile" class="fw-bold" style="font-size: 12px;">RUHAMYA Elie</span><span
+                                        id="span-profile" class="fw-bold" style="font-size: 12px;">RUHAMYA... Elie</span><span
                                         id="span-profile"
                                         style="font-size: 11px;/*height: 16px;*/">Administrateur</span></span></button>
 
@@ -78,13 +78,13 @@
                         </svg></button>
                 </div>
             </div>
-            <!--  -->
-            <Navbar v-if="enable"></Navbar>
+            <Navbar :boutique="callBoutique" v-if="enable || my_boutique_id"></Navbar>
         </div>
     </header>
 
     <Menu></Menu>
     <notices></notices>
+
 </template>
 
 <script>
@@ -95,12 +95,16 @@ import Navbar from './Comps/navbar.vue';
 import Theme from './Comps/Theme.vue'
 import Dropdown from './Comps/Dropdown-menu-computer-version.vue'
 
+import axios from 'axios'
+
 export default {
     data() {
         return {
+            boutique: '',
             enable: window.location.pathname === '/' ? false : true
         }
     },
+    
     components: {
         Menu,
         Notices,
@@ -109,7 +113,20 @@ export default {
         Dropdown
     },
 
-    mounted() {},
+    props: {
+        my_boutique_id: ''
+    },
+
+    computed: {
+        callBoutique() {
+            axios.get('/menu').then((res) => {
+                this.boutique = res.data.boutique
+            }).catch((err) => {
+                this.boutique = ''
+            })
+            return this.boutique
+        }
+    }
 }
 
 </script>

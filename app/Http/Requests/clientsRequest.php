@@ -23,7 +23,6 @@ class clientsRequest extends FormRequest
     {
         return [
             'nom' => 'required|min: 3|max:50',
-            // 'phone' => 'required|min: 10|max:10',
         ];
     }
 
@@ -33,10 +32,6 @@ class clientsRequest extends FormRequest
             'nom.required' => 'Ce champ est requis',
             'nom.min' => 'Pas moins de 3 caractères',
             'nom.max' => 'Pas plus de 50 caractères',
-
-            // 'phone.required' => 'Ce champ est requis',
-            // 'phone.min' => 'Ce champ n\'est pas correcte',
-            // 'phone.max' => 'Ce champ n\'est pas correcte',
         ];
     }
 }

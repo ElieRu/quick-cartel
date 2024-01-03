@@ -11,5 +11,5 @@ class Boutique extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nom', 'email', 'phone', 'img', 'ure', 'description', 'adresse_id', 'user_id'];
+    protected $fillable = ['nom', 'email', 'img', 'ure', 'description', 'adresse_id', 'user_id'];
 }

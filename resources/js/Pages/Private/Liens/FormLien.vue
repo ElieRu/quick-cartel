@@ -47,7 +47,8 @@ import { integer } from '@vuelidate/validators';
 
 export default {
     props: {
-        fournisseur_id: integer
+        fournisseur_id: integer,
+        boutique_id: integer,
     },
     emit: ['hide-form-link'],
     data() {
@@ -55,7 +56,8 @@ export default {
             form: useForm({
                 site: null,
                 lien: null,
-                fournisseur_id: this.fournisseur_id ? this.fournisseur_id : null
+                fournisseur_id: this.fournisseur_id ? this.fournisseur_id : null,
+                boutique_id: this.boutique_id ? this.boutique_id : null
             })
         }
     },
@@ -75,6 +77,7 @@ export default {
     methods: {
         submitLink () {
             this.form.post('/liens', {
+                preserveScroll: true,
                 onSuccess: () => {
                     this.form.reset()
                     this.$emit('hide-form-link')

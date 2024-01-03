@@ -31,12 +31,13 @@ class ventesController extends Controller
                 }
             })
             ->where('articles.user_id', Auth::id())
-            ->where('articles.boutique_id', $boutique_id)
+            ->where('articles.boutique_id', '=', $boutique_id)
             ->join('categories', 'categories.id', '=', 'articles.categorie_id')
             ->join('specifications', 'specifications.id', '=', 'articles.specification_id')
             ->select('articles.*', 'categories.nom As catNom', 'specifications.nom As specNom')
             ->get();
 
+        // dd($articles);
 
         $action = $request->action ? $request->action : 'vente';
 

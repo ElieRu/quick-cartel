@@ -24,7 +24,8 @@
                                                     </path>
                                                 </svg>
 
-                                            </div><input id="profile-img" type="file" accept="image/*" @change="onChange"
+                                            </div>
+                                            <input id="profile-img" type="file" accept="image/*" @change="onChange"
                                                 ref="callButton" style="display: none;" />
                                             <label @click="callFile"
                                                 class="form-label bg-body shadow-sm d-flex flex-column justify-content-center align-items-center"

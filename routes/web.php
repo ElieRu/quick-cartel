@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\abonnementsController;
 use App\Http\Controllers\aboutController;
 use App\Http\Controllers\accountController;
+use App\Http\Controllers\accountInfosByMenuController;
 use App\Http\Controllers\achatsController;
 use App\Http\Controllers\AdresseController;
 use App\Http\Controllers\articlesController;
@@ -12,10 +14,12 @@ use App\Http\Controllers\clientUtilisateurController;
 use App\Http\Controllers\commandesController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\detailsController;
+use App\Http\Controllers\descriptionController;
 use App\Http\Controllers\fournisseursController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\imagesController;
 use App\Http\Controllers\liensController;
+use App\Http\Controllers\menuController;
 use App\Http\Controllers\paypalCtr;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\promotionsController;
@@ -52,14 +56,20 @@ Route::get('/', [HomeController::class, 'show'])->name('home');
 
 
 Route::get('/account', [accountController::class, 'show'])->name('account');
-// Route::get('/articles', [articlesController::class, 'show'])->name('articles');
-Route::get('/promotions', [promotionsController::class, 'show'])->name('promotions');
+Route::get('/account-articles', [articlesController::class, 'accountArticles'])->name('articles');
 
 Route::post('/boutiqueExist', [boutiquesController::class, 'boutiqueExist']);
 
 
-
 Route::get('/about', [aboutController::class, 'show'])->name('about');
+
+Route::get('/promotions', [promotionsController::class, 'show'])->name('promotions');
+Route::get('/promotions/{id}', [promotionsController::class, 'moreInfos'])->name('promotions.infos');
+Route::get('/account-infos-menu', [accountInfosByMenuController::class, 'show'])->name('account.infos.menu.show');
+Route::get('/menu', [menuController::class, 'show'])->name('menu.show');
+
+Route::get('/abonnements', [abonnementsController::class, 'show'])->name('abonnements.show');
+Route::post('/abonnements', [abonnementsController::class, 'create'])->name('abonnements.create');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -77,11 +87,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/articles', [articlesController::class, 'create'])->name('articlesManagment');
     Route::put('/articles', [articlesController::class, 'update'])->name('articlesManagment');
     Route::delete('/articles', [articlesController::class, 'remove'])->name('articlesManagment');    
+    Route::get('/articles/{id}', [articlesController::class, 'showMore'])->name('articles.show.more');
+    // Route::get('/articles/{id}', [articlesController::class, 'listPromotion'])->name('list.promotion');
     
-    Route::get('/articles/{id}', [detailsController::class, 'index']);
-    Route::post('/articles/details', [detailsController::class, 'store']);
-    Route::put('/articles/details', [detailsController::class, 'update']);
-    Route::delete('/articles/details', [detailsController::class, 'remove']);
+    // Route::get('/articles/{id}', [descriptionController::class, 'index']);
+    Route::post('/descriptions', [descriptionController::class, 'store']);
+    Route::put('/descriptions', [descriptionController::class, 'update']);
+    Route::delete('/descriptions', [descriptionController::class, 'remove']);
+
+    Route::get('/images-articles', [imagesController::class, 'index']);
+    Route::post('/images-articles', [imagesController::class, 'create']);
+    Route::put('/images-articles', [imagesController::class, 'update']);
+    Route::delete('/images-articles', [imagesController::class, 'remove']);
 
     
     // achats
@@ -121,6 +138,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/fournisseurs', [fournisseursController::class, 'delete'])->name('fournisseurs.delete');
     Route::get('/fournisseurs/{id}', [fournisseursController::class, 'moreInfos'])->name('fournisseur.informations.show');
 
+
+    Route::post('/promotions', [promotionsController::class, 'create'])->name('promotions.create');
+    Route::delete('/promotions', [promotionsController::class, 'delete'])->name('promotions.delete');
+
     
     // Tous les clients
     Route::get('/clients', [clientsController::class, 'show'])->name('clients.show');
@@ -142,9 +163,10 @@ Route::middleware(['auth'])->group(function () {
     
     
     // Les réquisitions
-    // Route::get('/requisitions', [requisitionsController::class, 'index']);
+    // Route::get('/requisitions', [requisitionsController::class, 'show']);
     Route::post('/requisitions', [requisitionsController::class, 'create']);
     Route::put('/requisitions', [requisitionsController::class, 'update']);
+    Route::get('/cancel-requisitions', [requisitionsController::class, 'cancel']);
     Route::delete('/requisitions', [requisitionsController::class, 'delete']);
 
 
@@ -175,6 +197,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/boutique', [boutiquesController::class, 'create'])->name('boutique.create');
     Route::put('/boutique', [boutiquesController::class, 'update'])->name('boutique.update');
     Route::delete('/boutique', [boutiquesController::class, 'delete'])->name('boutique.delete');
-
+    
 });
 

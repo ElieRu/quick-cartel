@@ -52,7 +52,7 @@
                                     <div class="d-flex">
                                         <div class="d-flex flex-column justify-content-center text-capitalize"><span
                                                 style="font-size: 13px;">{{ promotion.nomArticle }}</span><span
-                                                class="text-body-tertiary text-capitalize" style="font-size: 11px;">{{
+                                                class="text-body-tertiary d-flex justify-content-start text-capitalize" style="font-size: 11px;">{{
                                                     promotion.nomPromotion }}</span></div>
                                     </div>
                                     <div class="d-flex flex-column">

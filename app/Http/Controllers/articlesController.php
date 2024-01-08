@@ -174,7 +174,7 @@ class articlesController extends Controller
             ->where('articles.boutique_id', $boutique_id)
             ->join('specifications', 'specifications.id', '=', 'articles.specification_id')
             ->join('images', 'images.article_id', '=', 'articles.id')
-            ->where('images.default', '=', 1)
+            ->where('images.default', '=', true)
             ->select('articles.*', 'specifications.nom as nomSpec', 'images.*')
             ->get();
 

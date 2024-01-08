@@ -27,6 +27,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="mb-3">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5>D&#39;autres promotions</h5><a

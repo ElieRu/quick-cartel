@@ -5,7 +5,7 @@
 
         <div class="container" style="padding-top: 15px;">
 
-            <div class="d-flex" style="height: 380px;margin-bottom: 20px;">
+            <div class="d-flex mb-5" style="height: 380px;">
                 <div id="div-list-categories" class="bg-body border rounded border-0 shadow-sm d-none d-md-block">
                     <div class="d-flex align-items-center" style="height: 10%;padding: 5px;">
                         <ul class="nav nav-pills flex-column mb-auto">
@@ -159,65 +159,8 @@
                 </div>
             </div>
 
-            <div id="div-pub-sellers" class="bg-body shadow-sm d-flex">
-                <div style="width: 30%;"></div>
-                <div id="div-pub-articles" class="carousel slide" data-bs-ride="false">
-                    <div class="carousel-inner" style="height: 100%;">
-                        <div class="carousel-item active" style="height: 100%;">
-                            <div class="d-flex" style="height: 100%;">
-                                <BoutiqueListe :boutiques="boutiques"></BoutiqueListe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><button id="btn-panier" class="btn btn-primary border-0 shadow" type="button" data-bs-target="#panier"
-                data-bs-toggle="modal" style="outline: none;"><i class="fas fa-shopping-cart"></i></button>
-        </div>
+            <ArticleBoxList :articles="articles"></ArticleBoxList>
 
-        <div id="panier" class="modal fade" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Title</h4><button class="btn-close" type="button" aria-label="Close"
-                            data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>The content of your modal.</p>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button"
-                            data-bs-dismiss="modal">Close</button><button class="btn btn-primary"
-                            type="button">Save</button></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="welcom-modal" class="modal fade" role="dialog" tabindex="-1" data-bs-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down" role="document">
-                <div class="modal-content">
-                    <div class="modal-body border-0 shadow-lg" style="height: 398px;padding: 0px;">
-                        <div class="d-flex flex-column justify-content-center" style="height: 100%;padding: 20px;">
-                            <div class="text-center">
-                                <div class="d-flex justify-content-center mb-4">
-                                    <div class="bg-primary border rounded-circle border-0 shadow-sm" style="padding: 14px;">
-                                        <i class="fas fa-user-lock text-body-emphasis" style="font-size: 20px;"></i>
-                                    </div>
-                                </div>
-                                <h6 class="fw-bold mb-4">Présentation de votre profile</h6>
-                                <div>
-                                    <p class="d-flex justify-content-center">Le choix du type de compte dépend de vos
-                                        besoins spécifiques. Il est donc important de bien comprendre les différences entre
-                                        ces deux types de compte avant de vous décider.</p>
-                                </div>
-                                <div class="mt-4"><button
-                                        class="btn btn-primary btn-lg link-light border rounded-pill border-0 shadow"
-                                        type="button"
-                                        style="font-size: 13px;padding-right: 25px;padding-left: 25px;">Consultez votre
-                                        compte</button></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div id="offcanvas-menu" class="offcanvas offcanvas-start" tabindex="-1">
@@ -303,7 +246,6 @@
                 </div>
             </div>
         </div>
-
 
         <div id="modal-1" class="modal fade" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down" role="document">
@@ -398,15 +340,21 @@
 
 import Header from '../Components/Header/Header.vue';
 import BoutiqueListe from './Home/BoutiqueListe.vue';
+import ArticleBoxList from './Home/Articles/Articles.vue';
 
 export default {
     components: {
         Header,
-        BoutiqueListe
+        BoutiqueListe,
+        ArticleBoxList
     },
     props: {
-        boutiques: Object
-    }
+        boutiques: Object,
+        articles: Object
+    },
+    mounted() {
+        console.log(this.articles[0].descriptions.length);
+    },
 }
 
 </script>

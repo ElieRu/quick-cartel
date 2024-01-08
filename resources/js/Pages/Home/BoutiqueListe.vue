@@ -35,7 +35,7 @@ export default {
         Link
     },
     props: {
-        boutiques: Object
-    }
+        boutiques: Object,
+    },
 }
 </script>

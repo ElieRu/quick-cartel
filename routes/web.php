@@ -7,6 +7,7 @@ use App\Http\Controllers\accountInfosByMenuController;
 use App\Http\Controllers\achatsController;
 use App\Http\Controllers\AdresseController;
 use App\Http\Controllers\articlesController;
+use App\Http\Controllers\articlesHomeController;
 use App\Http\Controllers\authenticationController;
 use App\Http\Controllers\boutiquesController;
 use App\Http\Controllers\clientsController;
@@ -44,7 +45,6 @@ use function Laravel\Prompts\search;
 
 
 Route::get('/', [HomeController::class, 'show'])->name('home');
-
 
 // Route::middleware(['guest'])->group(function () {
     Route::get('/login', [authenticationController::class, 'login'])->name('login');

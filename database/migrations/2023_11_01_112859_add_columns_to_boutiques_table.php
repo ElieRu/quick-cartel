@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('boutiques', function (Blueprint $table) {
             $table->binary('logo', 2048)->after('nom')->nullable();
-            $table->binary('arrier_plan', 2048)->after('description')->nullable();
+            $table->binary('arriere_plan', 2048)->after('description')->nullable();
         });
     }
 

@@ -1,12 +1,12 @@
 <template>
     <Header :my_boutique_id="my_boutique_id"></Header>
     <div class="container" style="padding-top: 30px;">
-        
+
         <Background></Background>
 
-        <ArticlesHome></ArticlesHome>
+        <ArticlesHome :articles="articles"></ArticlesHome>
 
-        <ArticlesPromotions></ArticlesPromotions>
+        <ArticlesPromotions :promotions="promotions"></ArticlesPromotions>
 
     </div>
 </template>
@@ -26,10 +26,12 @@ export default {
         ArticlesPromotions
     },
     props: {
-        my_boutique_id: ''
+        my_boutique_id: '',
+        articles: Object,
+        promotions: Object,
     },
     mounted() {
-        // console.log(this.boutique_id);
+        console.log(this.articles);
     },
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-body border rounded border-0 mb-3" style="padding: 10px;">
+    <div class="bg-body border rounded border-0 mb-4" style="padding: 10px;">
 
         <div class="d-flex justify-content-between" style="margin-bottom: 10px;">
             <span class="bg-body-secondary border rounded border-0 d-flex align-items-center"
@@ -22,10 +22,10 @@
             <div class="border-0 d-inline-flex">
                 
                 
-                <div v-for="article in articles" class="border rounded" style="width: 200px;height: 100%;margin-right: 15px;padding: 5px;">
+                <div v-for="article in categorie" class="border rounded" style="width: 200px;height: 100%;margin-right: 15px;padding: 5px;">
 
                     <div class="border rounded border-0" style="height: 180px;overflow: overlay;cursor: pointer;"
-                        @click="initialDataModal(article)" data-bs-target="#panier" data-bs-toggle="modal">
+                        @click="initialDataModal(article)" ref="monBouton" data-bs-target='#panier' data-bs-toggle="modal"  >
                         <img :src="'/storage/'+article.src" style="width:100%; height:100%;" />
                     </div>
                     <div class="d-flex justify-content-between align-items-center" style="height: 40px;margin-top: 10px;">
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <PaymentModal :article="myArticle"></PaymentModal>
+        <PaymentModal @close-modal="callback" :myUser="myUser" :contacts="contacts" :article="myArticle"></PaymentModal>
 
     </div>
 </template>
@@ -78,17 +78,28 @@ export default {
         Link
     },
     props: {
-        articles: Object
+        categorie: Object,
+        contacts: Object,
+        myUser: Object
     },
     data() {
         return {
-            myArticle: Object
+            myArticle: Object,
+            panier: ''
         }
     },
     methods: {
         initialDataModal (article) {
             this.myArticle = article
+            // console.log(this.myArticle);
+        },
+        callback () {
+            this.$refs.monBouton.click()
         }
+    },
+
+    mounted() {
+        console.log(this.myUser);
     }
 }
 

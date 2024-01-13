@@ -3,12 +3,12 @@
 
     <div class="container" style="padding-top: 15px;">
 
-        <form @submit.prevent="submit_payment(paymentForm)" method="post" style="margin-top: 10px;">
+        <!-- <form @submit.prevent="submit_payment(paymentForm)" method="post" style="margin-top: 10px;">
             <input type="hidden" name="price" v-model="paymentForm.price"> <br>
             <input type="hidden" name="product_name" v-model="paymentForm.product_name"> <br>
             <input type="hidden" name="quantity" v-model="paymentForm.quantity"> <br>
             <button submit>Pay</button>
-        </form>
+        </form> -->
 
         <div>
             <h4 class="text-body-tertiary">Gestion d&#39;articles</h4>
@@ -89,7 +89,7 @@
                                 <a :href="'/articles/article?id=' + article.id"
                                     class="text-capitalize link-body-emphasis link-opacity-75"
                                     style="text-decoration: none;">
-                                    {{ article.prix }} {{ article.devise == 'USD' ? '$' : 'Fc' }}
+                                    {{ article.prix ? article.prix +'$' : 'null'}}
                                 </a>
                             </td>
                             <td class="d-none d-lg-table-cell">

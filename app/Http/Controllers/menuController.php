@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Boutique;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -16,8 +17,13 @@ class menuController extends Controller
             $user_id = null;
         }
         
-        $boutique = Boutique::where('user_id', $user_id)->get(["id", "nom"]);
-                
+        try {
+            $boutique = Boutique::where('user_id', $user_id)->get(["id", "nom"]);
+        } catch (\Throwable $th) {
+            $boutique = null;
+        }
+        
+
         return response()->json([
             'boutique' => $boutique,
         ]);

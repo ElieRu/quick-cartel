@@ -1,59 +1,59 @@
-
 <template>
-    <div id="call-menu-navbar" class="offcanvas offcanvas-start" tabindex="-1">
+    <div id="btn-dropdown" class="dropdown bg-body-tertiary border rounded-pill border-0 shadow-sm d-none d-md-block">
+        <button id="btn-show-profile" class="btn border rounded-pill border-0 d-flex flex-row" aria-expanded="false"
+            data-bs-toggle="dropdown" type="button" style="padding: 0px;padding-right: 1px;">
+            <span style="width: 38px;height: 38px;overflow: hidden;margin: 1px;"
+                class="d-flex flex-column justify-content-center align-items-center">
 
-        <div class="offcanvas-header d-flex flex-column" style="padding: 22px;">
-            <button @click="myAccount" v-if="infos.user" :disabled="!this.boutique_id"
-                class="bg-body-secondary border rounded-pill border-0 d-flex justify-content-between align-items-center"
-                style="width: 100%;font-size: 10px;padding: 10px;padding-right: 15px;">
-                <div class="d-flex align-items-center">
-                    <div
-                        style="height: 40px;width: 40px;border-radius: 100%;border: 1px dashed var(--bs-gray-700);padding: 1px;">
+                <img v-if="displayIcon" class="border rounded-circle border-0" style="width: 100%;height: 100%;"
+                    :src="'/storage/' + infos.user.image" />
 
-                        <img v-if="infos.user.image" class="rounded-circle border-0" style="width: 100%; height:100%;"
-                            :src="'/storage/' + infos.user.image" />
+                <svg v-if="!displayIcon" style="font-size: 33px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                    width="1em" height="1em" fill="currentColor">
+                    <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                    <path
+                        d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c39.77 0 72 32.24 72 72S295.8 272 256 272c-39.76 0-72-32.24-72-72S216.2 128 256 128zM256 448c-52.93 0-100.9-21.53-135.7-56.29C136.5 349.9 176.5 320 224 320h64c47.54 0 87.54 29.88 103.7 71.71C356.9 426.5 308.9 448 256 448z">
+                    </path>
+                </svg>
 
-                        <svg v-if="infos.user == false || infos.user.image == null" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512" width="1em" height="1em" fill="currentColor" style="font-size: 36px;">
+            </span>
+            <div>
 
-                            <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                            <path
-                                d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c39.77 0 72 32.24 72 72S295.8 272 256 272c-39.76 0-72-32.24-72-72S216.2 128 256 128zM256 448c-52.93 0-100.9-21.53-135.7-56.29C136.5 349.9 176.5 320 224 320h64c47.54 0 87.54 29.88 103.7 71.71C356.9 426.5 308.9 448 256 448z">
-                            </path>
-                        </svg>
+                <span v-if="infos.user" class="d-flex flex-column"
+                    style="text-align: left;margin-left: 10px;font-size: 13px;overflow: hidden;margin-right: 10px;">
 
-                    </div>
-                    <span class="text-start d-flex flex-column" style="margin-left: 15px;">
-                        <span class="fw-bold text-capitalize" style="font-size: 12px;">
-                            {{ infos.user.name ? infos.user.name : "Vous n'etes pas connecté" }} {{ infos.user.postnom }}
-                        </span><span style="font-size: 10px;">
-                            {{ boutique_name ? boutique_name : '' }}
-                        </span></span>
-                </div><button class="btn-close shadow-none" ref="closeMenu" type="button" aria-label="Close"
-                    data-bs-target="#call-menu-navbar" data-bs-toggle="offcanvas"></button>
-            </button>
-        </div>
+                    <span id="span-profile" class="fw-bold text-capitalize" style="font-size: 12px;">{{ infos.user.name ?
+                        infos.user.name : '' }} {{ infos.user.postnom }}
+                    </span>
 
 
-        <div class="offcanvas-body d-flex flex-column pt-0">
+                    <span v-if="infos.boutique.length == 1" id="span-profile" style="font-size: 11px;">{{ infos.boutique ?
+                        infos.boutique[0].nom
+                        : '' }}</span>
+                </span>
+            </div>
+
+        </button>
+
+
+        <div class="dropdown-menu border-0 shadow" style="padding: 5px;border-radius: 10px;width: 250px;">
 
             <ul v-if="infos.user" class="nav nav-pills flex-column mb-auto">
-                <li v-if="infos.boutique.length == 0" style="background-color: aquamarine;" id="link-menu" class="nav-item">
+                <li v-if="infos.boutique.length == 0" id="link-menu" class="nav-item">
                     <a id="link-menu" class="nav-link" href="/boutique">
                         Créer un business en ligne
                     </a>
                 </li>
 
-                <li id="link-menu" class="nav-item">
+                <!-- <li id="link-menu" class="nav-item">
                     <a id="link-menu" class="nav-link" href="/dashboard">
                         <svg class="me-2" xmlns="http://www.w3.org/2000/svg" viewBox="-32 0 512 512" width="1em"
                             height="1em" fill="currentColor">
-                            <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
                             <path
                                 d="M160 80C160 53.49 181.5 32 208 32H240C266.5 32 288 53.49 288 80V432C288 458.5 266.5 480 240 480H208C181.5 480 160 458.5 160 432V80zM0 272C0 245.5 21.49 224 48 224H80C106.5 224 128 245.5 128 272V432C128 458.5 106.5 480 80 480H48C21.49 480 0 458.5 0 432V272zM400 96C426.5 96 448 117.5 448 144V432C448 458.5 426.5 480 400 480H368C341.5 480 320 458.5 320 432V144C320 117.5 341.5 96 368 96H400z">
                             </path>
                         </svg> Tableau de bord</a>
-                </li>
+                </li> -->
                 <li class="nav-item" style="opacity: 0.80;"><a id="link-menu" class="nav-link" href="/achats"><svg
                             class="me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 576 576" width="1em" height="1em"
                             fill="currentColor">
@@ -139,22 +139,6 @@
                 </li>
             </ul>
 
-
-            <div v-if="infos.user == false" id="carousel-new-account" class="bg-body-secondary border rounded border-0"
-                style="padding: 10px; margin-bottom: 20px;">
-                <div class="carousel-inner" style="height: 100%;">
-                    <div style="height: 100%;">
-                        <div id="div-gradient" style="margin-bottom: 15px;">
-                            <h1 class="fw-bold" style="font-family: Montserrat, sans-serif;">Bienvenue</h1>
-                        </div>
-                        <div>
-                            <p>Connectez-vous ou créer un nouveau compte.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
             <a id="item-dropdown" v-if="!infos.user" href="/register" class="dropdown-item">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -64 640 640" width="1em" height="1em" fill="currentColor"
                     style="margin-right: 15px;">
@@ -172,64 +156,59 @@
                         d="M80 192V144C80 64.47 144.5 0 224 0C303.5 0 368 64.47 368 144V192H384C419.3 192 448 220.7 448 256V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V256C0 220.7 28.65 192 64 192H80zM144 192H304V144C304 99.82 268.2 64 224 64C179.8 64 144 99.82 144 144V192z">
                     </path>
                 </svg>Connectez-vous</a>
-        </div>
 
+        </div>
     </div>
 </template>
 
 <script>
 
-import { Link, router } from "@inertiajs/vue3"
+import { Link, useForm } from "@inertiajs/vue3";
 import axios from 'axios'
 
 export default {
-    components: {
-        Link
-    },
     data() {
         return {
             infos: {
                 user: '',
                 boutique: '',
             },
-
-            boutique_name: '',
-            boutique_id: '',
-
-            unAuth: ''
+            // myUser: '',
+            unAuth: '',
+            userIcon: false
         }
+    },
+    props: {
+        myUser: ''
     },
     async mounted() {
         await axios.post('/userInformations').then((resp) => {
             this.infos.user = resp.data.user ? resp.data.user : false
             this.infos.boutique = resp.data.boutique ? resp.data.boutique : false
-
+            // console.log(this.infos.user);
         }).catch((err) => {
             this.unAuth = err.response.data.message
         })
-
-        await axios.get('/menu').then((resp) => {
-            this.boutique_name = resp.data.boutique[0].nom;
-            this.boutique_id = resp.data.boutique[0].id;
-        }).catch((err) => {
-            this.boutique_name = false
-            this.boutique_id = false
-        })
-
     },
+
+    computed: {
+        displayIcon() {
+            if (this.infos.user) {
+                this.userIcon = this.infos.user.image ? true : false
+            }
+            return this.userIcon
+        }
+    },
+
     methods: {
         desconnect() {
             axios.post('/logout').then((resp) => {
                 window.location.replace('/')
             })
         },
-
-        myAccount() {
-            this.$refs.closeMenu.click()
-            router.get('/account', { id: this.boutique_id })
-        }
     }
 }
+
 
 
 </script>

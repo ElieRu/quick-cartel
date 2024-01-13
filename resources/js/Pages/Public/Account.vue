@@ -31,7 +31,7 @@ export default {
         promotions: Object,
     },
     mounted() {
-        console.log(this.articles);
+        // console.log(this.articles);
     },
 }
 

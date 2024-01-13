@@ -1,5 +1,5 @@
 <template>
-    <Header></Header>
+    <Header :my_boutique_id="boutique.id"></Header>
 
     <div class="container" style="padding-top: 15px;" v-if="boutique">
         <div class="row d-block d-md-flex">
@@ -19,12 +19,14 @@
                                     style="width: 100px;height: 100px;margin-top: -50px;border-radius: 100%;padding: 2px;overflow: hidden;border: 1.5px dashed var(--bs-gray-500);">
                                     <div
                                         style="width: 100%;height: 100%;background: var(--bs-gray-600);border-radius: 100%;">
-                                        <img style="width: 100%;height: 100%;border-radius: 100%;" :src="'/storage/' + boutique.img" />
+                                        <img style="width: 100%;height: 100%;border-radius: 100%;"
+                                            :src="'/images/img logo.jpg'"
+                                            
+                                             />
                                     </div>
                                 </div>
 
-                                <button
-                                    @click="putLogoBoutique"
+                                <button @click="putLogoBoutique"
                                     class="form-label border-0 bg-body shadow-sm d-flex flex-column justify-content-center align-items-center"
                                     style="cursor: pointer;height: 25px;width: 25px;border-radius: 100%;margin-top: 13px;margin-left: 75px;position: absolute;"
                                     for="profile-logo-boutique"><svg xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +39,8 @@
                                     </svg>
                                 </button>
 
-                                <input id="profile-logo-boutique" ref="inputLogoBoutique" type="file" accept="image/*" style="display: none;" />
+                                <input id="profile-logo-boutique" ref="inputLogoBoutique" type="file" accept="image/*"
+                                    style="display: none;" />
 
 
                                 <div class="d-flex flex-column" style="margin-left: 15px;margin-top: 10px;"><span
@@ -116,6 +119,23 @@
 
 
             <div class="col d-none d-md-block">
+
+                <div class="container bg-body p-2 mb-3 border rounded border-1" v-if="boutique">
+                    <button
+                        class="btn btn-primary btn-sm bg-dark-subtle border-1 border-dark-subtle shadow-none d-flex justify-content-center align-items-center"
+                        type="button" data-bs-target="#lien-form" data-bs-toggle="modal" ref="buttonFormLien"
+                        style="margin-right: 6px;height: 31px;width: 32px;"><svg xmlns="http://www.w3.org/2000/svg"
+                            viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
+                            <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                            <path
+                                d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z">
+                            </path>
+                        </svg></button>
+
+                    <FormLien @hide-form-link="hideLinkForm" :boutique_id="boutique.id"></FormLien>
+                    <ListLiens :liens="liens"></ListLiens>
+                </div>
+
                 <div id="div-infos-profile" class="bg-body border rounded border-0 shadow d-flex flex-column"
                     style="padding: 10px;height: 320px;position: sticky;top: 144px;">
                     <div class="border rounded d-flex align-items-center" style="overflow: hidden;padding-right: 10px;">
@@ -134,8 +154,6 @@
                             </svg><span class="text-body-secondary" style="font-size: 12px;">Aucun abonné.</span></div>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -241,25 +259,9 @@
         </div>
     </div>
 
-    <div class="container bg-body p-2" v-if="boutique">
-        <button
-            class="btn btn-primary btn-sm bg-dark-subtle border-1 border-dark-subtle shadow-none d-flex justify-content-center align-items-center"
-            type="button" data-bs-target="#lien-form" data-bs-toggle="modal" ref="buttonFormLien"
-            style="margin-right: 6px;height: 31px;width: 32px;"><svg xmlns="http://www.w3.org/2000/svg"
-                viewBox="-32 0 512 512" width="1em" height="1em" fill="currentColor">
-                <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
-                <path
-                    d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z">
-                </path>
-            </svg></button>
-
-        <FormLien @hide-form-link="hideLinkForm" :boutique_id="boutique.id"></FormLien>
-        <ListLiens :liens="liens"></ListLiens>
-    </div>
-
     <div class="container d-flex" v-if="boutique">
 
-        <div class="container">
+        <div class="container" v-if="false">
             <div class="container">
                 supprimer
                 <form method="post" @submit.prevent="deleteBtk.delete('/boutique', {
@@ -312,7 +314,7 @@ export default {
         FormLien,
     },
     mounted() {
-        // console.log(this.boutique);
+        console.log(this.boutique.id);
     },
 
     props: ['boutique', 'contacts', 'liens'],

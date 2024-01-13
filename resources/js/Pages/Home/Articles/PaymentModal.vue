@@ -1,15 +1,16 @@
 <template>
-    <div id="panier" class="modal fade" role="dialog" tabindex="-1">
+    <div id="panier" class="modal fade" role="dialog" tabindex="-1" >
+        <!-- data-bs-backdrop="static" -->
         <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down" role="document">
             <div class="modal-content">
                 <div class="modal-header border-0">
-                    <h4 class="modal-title">Visualisation</h4><button class="btn-close shadow-none" type="button"
-                        aria-label="Close" data-bs-dismiss="modal"></button>
+                    <h4 class="modal-title">Visualisation</h4>
+                    <button class="btn-close shadow-none" @click="hide()" type="button"
+                        aria-label="Close" data-bs-dismiss="modal" ref="close"></button>
+                        <!-- -->
                 </div>
                 <div class="modal-body border-0">
                     <div class="row d-flex flex-column flex-lg-row">
-
-
 
                         <div class="col">
                             <div class="mb-3">
@@ -34,8 +35,6 @@
                             </div>
                         </div>
 
-
-
                         <div id="col-description" class="col" style="overflow: hidden;">
                             <div id="div-cont-payment">
                                 <div class="mb-3">
@@ -58,19 +57,19 @@
                                     <div>
                                         <div class="d-flex flex-column flex-sm-row justify-content-sm-between mb-2"><span
                                                 style="font-size: 13px;">Nom de l&#39;article</span><span
-                                                class="text-body-secondary" style="font-size: 13px;">{{ article.nom
+                                                class="text-body-secondary" style="font-size: 13px;">{{ article.nom ? article.nom : 'Non définie'
                                                 }}</span>
                                         </div>
                                         <div class="d-flex flex-column flex-sm-row justify-content-sm-between mb-2"><span
                                                 style="font-size: 13px;">Catégorie</span><span class="text-body-secondary"
-                                                style="font-size: 13px;">{{ article.nomCat }}</span></div>
+                                                style="font-size: 13px;">{{ article.nomCat ? article.nomCat : 'Non définie' }}</span></div>
                                         <div class="d-flex flex-column flex-sm-row justify-content-sm-between mb-2"><span
                                                 style="font-size: 13px;">Spécification</span><span
-                                                class="text-body-secondary" style="font-size: 13px;">{{ article.nomSpec
+                                                class="text-body-secondary" style="font-size: 13px;">{{ article.nomSpec ? article.nomSpec : 'Non définie'
                                                 }}</span></div>
                                         <div class="d-flex flex-column flex-sm-row justify-content-sm-between mb-2"><span
                                                 style="font-size: 13px;">Prix</span><span class="text-body-secondary"
-                                                style="font-size: 13px;">{{ article.prix + '$' }}</span></div>
+                                                style="font-size: 13px;">{{ article.prix ? article.prix + '$' : 'Non définie' }}</span></div>
                                         <div class="d-flex flex-column" v-if="article.description"><span
                                                 style="font-size: 13px;">Description</span><span class="text-body-secondary"
                                                 style="font-size: 13px;">{{ article.description }}</span></div>
@@ -102,28 +101,35 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="btn-group dropup">
-                                        <button class="btn btn-primary link-light border-0"
-                                            type="button" :disabled="article.qtte > 0 ? false : true"
-                                            style="padding-right: 15px;padding-left: 15px;font-size: 13px;">Acheter</button>
-                                        <button
-                                            class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split link-light"
-                                            data-bs-toggle="dropdown" aria-expanded="false" type="button"></button>
-                                        <div class="dropdown-menu border rounded border-0 shadow" style="padding: 10px;">
-                                            <a id="item-dropdown" class="dropdown-item bg-transparent"
-                                                href="#">Commander</a>
-                                            <Link 
-                                                :disabled="article.qtte > 0 ? false : true"
-                                                id="item-dropdown"
-                                                :class="article.qtte > 0 ? 'dropdown-item bg-transparent' : 'dropdown-item bg-primary-subtle'"
-                                                href="#"
-                                            >Réserver</Link>
+
+                                    <div>
+                                        <div class="d-flex mb-3">
+                                                <div class="form-check" style="margin-right: 10px;">
+                                                    <input :disabled="!article.qtte > 0 || reflesh ? false : true" id="commande" class="form-check-input" type="radio" valeur="commande" v-model="mouvement" name="name" />
+                                                    <label class="form-check-label" for="commande" style="cursor: pointer;">Commande</label>
+                                                </div>
+                                                <div class="form-check" style="margin-right: 10px;">
+                                                    <input :disabled="article.qtte > 0 || reflesh ? false : true" id="reservation" class="form-check-input" type="radio" value="reservation" v-model="mouvement" name="name" />
+                                                    <label class="form-check-label" for="reservation" style="cursor: pointer;">Résérvation</label>
+                                                </div>
+                                                <div class="form-check" style="margin-right: 10px;">
+                                                    <input :disabled="article.qtte > 0 || reflesh ? false : true" id="acheter" class="form-check-input" type="radio" value="acheter" v-model="mouvement" name="name" />
+                                                    <label class="form-check-label" for="acheter" style="cursor: pointer;">Acheter</label>
+                                                </div>
                                         </div>
-                                    </div>
+                                        
+                                        <div class="mb-3">
+                                            <button :disabled="!mouvement || reflesh" @click="callPayment('979411354', article.prix)" class="btn btn-primary bg-transparent border-0" type="button" style="padding: 0px;width: 50px;height: 50px;background: url('images/Airtel_logo-01.png');background-size: contain;margin-right: 10px;"></button>
+                                            <button :disabled="!mouvement || reflesh" @click="callPayment('898432520', article.prix)" class="btn btn-primary bg-transparent border-0" type="button" style="padding: 0px;width: 50px;height: 50px;background: url('images/Orange_logo.svg.png');background-size: contain;margin-right: 10px;"></button>
+                                            <button :disabled="!mouvement || reflesh" @click="callPayment(article.prix)" class="btn btn-primary bg-transparent border-0" type="button" style="padding: 0px;width: 50px;height: 50px;background: url('images/images.png');background-size: contain;margin-right: 10px;"></button>
+                                            <span v-if="reflesh" class="spinner-border spinner-border-sm text-primary" role="status"></span>
+                                        </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- <button @click="myStatus()">check status</button> -->
 
                     </div>
                 </div>
@@ -135,25 +141,84 @@
 <script>
 
 import { Link } from "@inertiajs/inertia";
+import axios from "axios";
 
 export default {
     props: {
-        article: ''
+        myUser: '',
+        article: '',
+        contacts: Object
     },
+
+    emits: ['close-modal'],
 
     components: {
         Link
     },
 
+    mounted() {
+        // setTimeout(() => {
+            // console.log('bien');
+        // }, 100);
+    },
+
     data() {
         return {
-            src: ''
+            src: '',
+            paymentId: '',
+            message: '',
+            mouvement: false,
+            reflesh: false
         }
     },
 
     methods: {
         activeImg(src) {
             this.src = src
+        },
+
+        hide () {
+            this.$emit('close-modal')
+        },
+
+        callPayment(phonenumber, prixUnitaire) {
+            
+            this.reflesh = true
+
+            axios.post('https://api.monetbil.com/payment/v1/placePayment', {
+                amount: prixUnitaire * 2600,
+                phonenumber: phonenumber,
+                service: "WB1iADpNSjIsgDEnlulPf4DkIq4ARZiT",
+                country: "CD",
+                currency: "CDF",
+                channel_name: "Airtel",
+                channel: "CD_AIRTELMONEY",
+                email: "elieruhamya20@gmail.com"
+            }).then((response_place_payment) => {
+                this.paymentId = response_place_payment.data.paymentId;
+                this.message = response_place_payment.data.message;
+                
+                
+                setTimeout(() => {
+                    this.$refs.close.click()
+                    this.reflesh = false
+                }, 1000);
+
+
+            })
+
+        },
+
+        myStatus () {
+            axios.post('https://api.monetbil.com/payment/v1/checkPayment', {
+                paymentId: this.paymentId,
+                // message: this.message
+            }).then((resp) => {
+                console.log(resp);
+                console.log(this.message);
+            }).catch((err) => {
+                console.log(err);
+            })
         }
     },
 }

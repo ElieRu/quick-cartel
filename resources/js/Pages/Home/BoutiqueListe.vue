@@ -10,7 +10,7 @@
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li v-for="boutique in boutiques" class="nav-item">
                         <Link 
-                            class="nav-link link-body-emphasis" 
+                            class="nav-link link-body-emphasis text-capitalize" 
                             
                             href="/account"
                             method="get"
@@ -18,8 +18,7 @@
                             :data="{ id: boutique.id }"
 
                             style="padding-right: 3px;padding-left: 8px;">
-                            <img :src="'/storage/' + boutique.img" width="30px"
-                                height="30px" style="border-radius: 100%;" /> {{ boutique.nom }}
+                            <img :src="boutique.logo ? boutique.logo : '/images/img logo.jpg'" style="width:30px;height:30px;border-radius: 100%;" /> {{ boutique.nom }}
                         </Link>
                     </li>
                 </ul>
@@ -36,6 +35,9 @@ export default {
     },
     props: {
         boutiques: Object,
+    },
+    mounted() {
+        // console.log(this.boutiques[0].logo);
     },
 }
 </script>

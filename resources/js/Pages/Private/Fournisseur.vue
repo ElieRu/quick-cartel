@@ -90,8 +90,6 @@
                 <Pagination :myDatas="fournisseurs"></Pagination>
             </div>
         </div>
-        Afficher les logos des fournisseurs...
-        Les autres atributs...
     </div>
 
     <!-- Formulaire d'enregistrement -->

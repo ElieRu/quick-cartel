@@ -61,6 +61,7 @@ class boutiquesController extends Controller
         Boutique::create([
             'nom' => $request->nom,
             'description' => $request->description,
+            'logo' => "/images/img logo.jpg",
             'user_id' => Auth::id()
         ]);
         return to_route('home');

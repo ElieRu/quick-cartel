@@ -49,23 +49,10 @@
                                 </path>
                             </svg><span class="badge rounded-pill bg-primary"
                                 style="position: absolute;top: 15px;margin-left: 16px;font-size: 8px;">+9</span></button>
-                        <div id="btn-dropdown"
-                            class="dropdown bg-body-tertiary border rounded-pill border-0 shadow-sm d-none d-md-block">
-
-
-                            <button id="btn-show-profile" class="btn border rounded-pill border-0 d-flex flex-row"
-                                aria-expanded="false" data-bs-toggle="dropdown" type="button"
-                                style="padding: 0px;padding-right: 1px;">
-                                <span style="width: 38px;height: 38px;overflow: hidden;margin: 1px;"><img
-                                        class="border rounded-circle border-0" style="width: 100%;height: 100%;"
-                                        src="images/img_profile1.jpg" /></span><span class="d-flex flex-column"
-                                    style="text-align: left;margin-left: 10px;font-size: 13px;overflow: hidden;margin-right: 10px;"><span
-                                        id="span-profile" class="fw-bold" style="font-size: 12px;">RUHAMYA... Elie</span><span
-                                        id="span-profile"
-                                        style="font-size: 11px;/*height: 16px;*/">Administrateur</span></span></button>
-
-                            <Dropdown></Dropdown>
-                        </div>
+                                
+                                
+                                <Dropdown :myUser="myUser"></Dropdown>
+                                
                     </div><button
                         class="btn btn-primary link-body-emphasis link-opacity-75 bg-transparent border-0 d-md-none"
                         type="button" style="padding: 0px;width: 40px;height: 40px;" data-bs-target="#call-menu-navbar"
@@ -78,7 +65,7 @@
                         </svg></button>
                 </div>
             </div>
-            <Navbar :boutique="callBoutique" v-if="enable || my_boutique_id"></Navbar>
+            <Navbar :boutique="callBoutique" :my_boutique_id="my_boutique_id" v-if="enable || my_boutique_id"></Navbar>
         </div>
     </header>
 
@@ -93,7 +80,7 @@ import Menu from './Comps/Menu.vue';
 import Notices from './Comps/Notices.vue';
 import Navbar from './Comps/navbar.vue';
 import Theme from './Comps/Theme.vue'
-import Dropdown from './Comps/Dropdown-menu-computer-version.vue'
+import Dropdown from './Comps/Dropdown.vue'
 
 import axios from 'axios'
 
@@ -114,7 +101,12 @@ export default {
     },
 
     props: {
-        my_boutique_id: ''
+        my_boutique_id: '',
+        myUser: ''
+    },
+
+    mounted() {
+        console.log(this.my_boutique_id);
     },
 
     computed: {
